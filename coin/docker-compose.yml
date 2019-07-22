@@ -17,6 +17,8 @@ services:
     - "8000:80"
     volumes:
     - "./webui/files/:/files/"
+    links:
+     - redis
 
   redis:
     image: redis
@@ -27,4 +29,6 @@ services:
 
   worker:
     build: worker
+    links:
+     - redis
 

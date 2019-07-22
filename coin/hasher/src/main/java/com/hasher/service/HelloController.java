@@ -10,6 +10,7 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,13 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class HelloController {
     
 	// hasher........................//////////////////////////////////////////////////////////////
-				@RequestMapping("/hasher")
+				
+	            @RequestMapping("/hasher")
 				@ResponseBody
 				String hellohasher() {
 					return "hasher running on hasher";
 				}
 				@RequestMapping("/hasher/{data}")
 				@ResponseBody
+				
 				public String gethash(
 						  @PathVariable("data") String data) {
 					MessageDigest digest;

@@ -15,9 +15,9 @@ public class Worker implements Runnable {
 	public void run() {
 
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(3000);
 
-			jedis = new Jedis("localhost");
+			jedis = new Jedis("redis");
 			this.restTemplate = new RestTemplate();	
 			startWorking();
 		} catch (InterruptedException e) {
@@ -32,12 +32,12 @@ public class Worker implements Runnable {
 		while (true) {
 			try {
 
-				work_loop(1);
+				work_loop(1000);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				try {
 					Thread.sleep(1000);
-					System.out.println("trying again ............. "+e.getMessage());
+					System.out.println("trying again ............. "+e.getMessage()+" "+ e.getCause());
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -51,30 +51,53 @@ public class Worker implements Runnable {
 
 		int deadline = 0;
 		int loops_done = 0;
-		if (System.currentTimeMillis() / 1000 > deadline) {
-			System.out.println("updating hash counter .............");
-			jedis.incrBy("hashes", loops_done);
-			loops_done = 0;
-			deadline = (int) (System.currentTimeMillis() / 1000 + interval);
+		while (true)
+		{
+			if (System.currentTimeMillis() > deadline) {
+				System.out.println("units of work done, updating hash counter ............."+ loops_done);
+				jedis.incrBy("hashes", loops_done);
+				loops_done = 0;
+				deadline = (int) (System.currentTimeMillis() + interval);
 
+			}
+			try {
+				work_once();
+				loops_done += 1;
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("trying again "+e.getMessage()+" "+ e.getCause());
+			}
+			
 		}
-		try {
-			work_once();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("trying again ");
-		}
-		loops_done += 1;
+		
 	}
 
 	private void work_once() throws InterruptedException {
+		
+//		def work_once():
+//		    log.debug("Doing one unit of work")
+//		    time.sleep(0.1)
+//		    random_bytes = get_random_bytes()
+//		    hex_hash = hash_bytes(random_bytes)
+//		    if not hex_hash.startswith('0'):
+//		        log.debug("No coin found")
+//		        return
+//		    log.info("Coin found: {}...".format(hex_hash[:8]))
+//		    created = redis.hset("wallet", hex_hash, random_bytes)
+//		    if not created:
+//		        log.info("We already had that coin")
+//		
+		
+		
+		
 		System.out.println("Doing one unit of work");
 		Thread.sleep(100);
 		
 	    String random_bytes = get_random_bytes();
+	    System.out.println("rng rec:  "+ random_bytes);
 	    String  hex_hash = hash_bytes(random_bytes);
-	    System.out.println(hex_hash);
+	    System.out.println("hashers rec: "+hex_hash);
 	    if(!hex_hash.startsWith("0"))
 	    {
 	    	
@@ -93,13 +116,19 @@ public class Worker implements Runnable {
 	}
 
 	String get_random_bytes() {
-		String result = restTemplate.getForObject("http://localhost:8001/rng/{howmany}", String.class, "32");
+		String result = restTemplate.getForObject("http://rng:8080/rng/{howmany}", String.class, "32");
 		return result;
 
 	}
 
 	String hash_bytes(String random_bytes) {
-		String result = restTemplate.getForObject("http://localhost:8002/hasher/{data}", String.class, random_bytes);
+//	String result=restTemplate.postForObject(
+//				  "http://hasher:8080/hasher/{data}",
+//				  random_bytes,
+//				  String.class);
+//		
+//		return result;
+		String result = restTemplate.getForObject("http://hasher:8080/hasher/{data}", String.class, random_bytes);
 		return result;
 
 	}
