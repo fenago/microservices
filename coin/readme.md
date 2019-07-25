@@ -47,10 +47,11 @@ https://github.com/fenago/microservices/blob/master/dockercoins-diagram.svg
 
 <h2>**How to complete this lab**</h2>
 
- <h2>**Create Random Number Generator Service**</h2>
-  
 
 Create a Spring Starter Project for rng service
+
+
+
 
   
 
@@ -324,9 +325,7 @@ public class HelloController {
 
 ```
 
-  *  `@RequestMapping` his annotation maps HTTP requests to handler methods of MVC and REST controllers with input coming from request (as you can see "/hasher/{data}"   ).
-
-*  `@ResponseBody` annotation tells a controller that the object returned is automatically serialized into JSON and passed back into the _Http Response_ object.
+ 
   
 
 <h2>**Make the application executable**</h2>
@@ -334,7 +333,6 @@ public class HelloController {
   
   
 
-Although it is possible to package this service as a traditional [WAR](https://spring.io/understanding/WAR) file for deployment to an external application server, the simpler approach demonstrated below creates a standalone application. You package everything in a single, executable JAR file, driven by a good old Java `main()` method. Along the way, you use Spring’s support for embedding the [Tomcat](https://spring.io/understanding/Tomcat) servlet container as the HTTP runtime, instead of deploying to an external instance.
 
   
 
@@ -367,28 +365,13 @@ public class HasherServiceApplication {
   
   
 
-`@SpringBootApplication` is a convenience annotation that adds all of the following:
-
-  
-  
-  
-
-*  `@Configuration` tags the class as a source of bean definitions for the application context.
-
-*  `@EnableAutoConfiguration` tells Spring Boot to start adding beans based on classpath settings, other beans, and various property settings.
-
-
-
-*  `@ComponentScan` tells Spring to look for other components, configurations, and services in the `hello` package, allowing it to find the `HelloController`.
 
  
  
 <h3>**Build an executable JAR**</h3>
 
   
-  
 
- You can run the application from the command line with Gradle or Maven. Or you can build a single executable JAR file that contains all the necessary dependencies, classes, and resources, and run that. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
 
   
 
@@ -405,12 +388,7 @@ java -jar target/hasherService-0.0.1-SNAPSHOT.jar
 
   
 
-The procedure above will create a runnable JAR (microservice).
-
-  
-  
-
-Logging output is displayed. The service should be up and running within a few seconds.
+The service should be up and running within a few seconds.
 
 Open browser and go to link  https://localhost:8080/hasher
 
@@ -444,7 +422,7 @@ ADD ./target/hasherService-0.0.1-SNAPSHOT.jar /target/hasherService-0.0.1-SNAPSH
   
   Let’s now build the docker image by typing the following command -
     `
-docker build -t rng-docker . 
+docker build -t hasher-docker . 
 `
 
 That’s it. You can now see the list of all the docker images on your system using the following command
