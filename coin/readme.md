@@ -204,7 +204,6 @@ RNG running on rng
 Now create a text file and name it  Dockerfile  and add following lines
 
 
-java -jar target/rngService-0.0.1-SNAPSHOT.jar
 
 ```
 #pull base image
