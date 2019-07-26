@@ -43,8 +43,8 @@
 -   `webui` queries `redis`, and computes and exposes "hashing speed" in our browser
 
 *** See the image***
-https://github.com/fenago/microservices/blob/master/dockercoins-diagram.svg
 
+![alt text](https://github.com/fenago/microservices/blob/master/dockercoins-diagram.svg "Logo Title Text 1")
 <h2>**How to complete this lab**</h2>
 
 
@@ -845,8 +845,5 @@ ADD ./target//target/com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar
   
 our worker service is complete now next step is to create webui to view graphical representation of the worker service  in browser
 
-
-
-<h2>**Web UI**</h2>
 
 
