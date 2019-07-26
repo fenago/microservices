@@ -829,6 +829,16 @@ var server = app.listen(80, function () {
 });
 
 ```
+1, DockerFile
+```
+FROM node:4-slim
+RUN npm install express
+RUN npm install redis
+COPY files/ /files/
+COPY webui.js /
+CMD ["node", "webui.js"]
+EXPOSE 80
+```
 <h2>**Time to compose all the docker in one file**</h2>
 
 This our final step create a new file `docker-compose.yml` in your mircservice folder and edit it as following
@@ -891,59 +901,7 @@ COMPOSE_HTTP_TIMEOUT=200
 ```
 and saved it
 In future you may need to add more environments variable for docker-compose here
-<h2>**Web UI**</h2>
 
-Download website code from [here](https://github.com/fenago/microservices/blob/master/coin/webui.zip) and unzip it to your working directory 
-
-Now let look at webui folder
-
-1, webui.js
-	This our server file built in express framework it when open browser and go to the link   it will get the data from redis and display on browser update every second  .if you want you can change index.html in files folder to make your own page
-	
-```
-    var express = require('express');
-var app = express();
-var redis = require('redis');
-
-var client = redis.createClient(6379, 'redis');
-client.on("error", function (err) {
-    console.error("Redis error", err);
-});
-
-app.get('/', function (req, res) {
-    res.redirect('/index.html');
-});
-
-app.get('/json', function (req, res) {
-    client.hlen('wallet', function (err, coins) {
-        client.get('hashes', function (err, hashes) {
-            var now = Date.now() / 1000;
-            res.json( {
-                coins: coins,
-                hashes: hashes,
-                now: now
-            });
-        });
-    });
-});
-
-app.use(express.static('files'));
-
-var server = app.listen(80, function () {
-    console.log('WEBUI running on port 80');
-});
-
-```
-1, DockerFile
-```
-FROM node:4-slim
-RUN npm install express
-RUN npm install redis
-COPY files/ /files/
-COPY webui.js /
-CMD ["node", "webui.js"]
-EXPOSE 80
-```
 
 in browser you can also get how many coin are found till now by using this link 'localhost/json"
 
