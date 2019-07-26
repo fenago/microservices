@@ -925,7 +925,74 @@ var server = app.listen(80, function () {
 });
 
 ```
-in browser you can also get how many coin are found till now by using this link 'localhost/json"
+<h2>**Time to compose all the docker in one file**</h2>
+
+This our final step create a new file `docker-compose.yml` in your mircservice folder and edit it as following
+```
+version: "2"
+
+services:
+  rng:
+    build: rng
+    ports:
+    - "8001:8080"
+## mapping interal docker port 8080 to 8001 for external serives (used in worker service in opur case) 
+    
+
+  hasher:
+    build: hasher
+    ports:
+    - "8002:8080"
+## mapping interal docker port 8080 to 8002 for external serives (used in worker service in opur case) 
+  webui:
+    build: webui
+    ports:
+    - "8000:80"
+    volumes:
+    - "./webui/files/:/files/"
+    links:
+     - redis
+
+  redis:
+    image: redis
+#redis image downloading from docker hub    
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+    - "6379:6379"
+
+  worker:
+    build: worker
+    links:
+     - redis
+
+```
+
+
+Nos save it and to run in terminal use folloing command
+`docker-compose up --build`
+
+it will run all the docker in the docker-compose file  it may take too long for first time  to download docker images from source sites .
+
+you can also use command without build `docker-compose up` but remember whenever there is any changes in any docker e.g worker etc you have to build again by adding `--build` 
+
+if you get the following error then some additional work needed 
+>  Compose error "HTTP request took too long to complete
+
+create new file inside your micrservice folder and named it `.env`(remember .env is extension and and file is without name)
+
+add following line inside the `.env` file
+```
+COMPOSE_HTTP_TIMEOUT=200
+```
+and saved it
+In future you may need to add more environments variable for docker-compose here
+
+Now go to your  browser and enter `localhost:8000` you will see the graph which is updating the hashes every second
+
+To find how many coin found till now go to link `localhost:8000/json`
+and you will see json object  representing total number of coin found total hashes down till now you can  refresh the page to get update json again
+
 
 
 
