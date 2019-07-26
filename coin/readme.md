@@ -110,6 +110,51 @@ public class HelloController {
   
 
 <h2>**Make the application executable**</h2>
+<h2>**Web UI**</h2>
+
+Download website code from [here](https://github.com/fenago/microservices/blob/master/coin/webui.zip) and unzip it to your working directory 
+
+Now let look at webui folder
+
+1, webui.js
+	This our server file built in express framework it when open browser and go to the link   it will get the data from redis and display on browser update every second  .if you want you can change index.html in files folder to make your own page
+	
+```
+    var express = require('express');
+var app = express();
+var redis = require('redis');
+
+var client = redis.createClient(6379, 'redis');
+client.on("error", function (err) {
+    console.error("Redis error", err);
+});
+
+app.get('/', function (req, res) {
+    res.redirect('/index.html');
+});
+
+app.get('/json', function (req, res) {
+    client.hlen('wallet', function (err, coins) {
+        client.get('hashes', function (err, hashes) {
+            var now = Date.now() / 1000;
+            res.json( {
+                coins: coins,
+                hashes: hashes,
+                now: now
+            });
+        });
+    });
+});
+
+app.use(express.static('files'));
+
+var server = app.listen(80, function () {
+    console.log('WEBUI running on port 80');
+});
+
+```
+in browser you can also get how many coin are found till now by using this link 'localhost/json"
+
 
   
   
@@ -168,7 +213,52 @@ public class RngServiceApplication {
   
   
 
- You can run the application from the command line with Gradle or Maven. Or you can build a single executable JAR file that contains all the necessary dependencies, classes, and resources, and run that. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environments, and so forth.
+ You can run the application from the command line with Gradle or Maven. Or you can build a single executable JAR file that contains all the necessary dependencies, classes, and resources, and run that. This makes it easy to ship, version, and deploy the service as an application throughout the development lifecycle, across different environment<h2>**Web UI**</h2>
+
+Download website code from [here](https://github.com/fenago/microservices/blob/master/coin/webui.zip) and unzip it to your working directory 
+
+Now let look at webui folder
+
+1, webui.js
+	This our server file built in express framework it when open browser and go to the link   it will get the data from redis and display on browser update every second  .if you want you can change index.html in files folder to make your own page
+	
+```
+    var express = require('express');
+var app = express();
+var redis = require('redis');
+
+var client = redis.createClient(6379, 'redis');
+client.on("error", function (err) {
+    console.error("Redis error", err);
+});
+
+app.get('/', function (req, res) {
+    res.redirect('/index.html');
+});
+
+app.get('/json', function (req, res) {
+    client.hlen('wallet', function (err, coins) {
+        client.get('hashes', function (err, hashes) {
+            var now = Date.now() / 1000;
+            res.json( {
+                coins: coins,
+                hashes: hashes,
+                now: now
+            });
+        });
+    });
+});
+
+app.use(express.static('files'));
+
+var server = app.listen(80, function () {
+    console.log('WEBUI running on port 80');
+});
+
+```
+in browser you can also get how many coin are found till now by using this link 'localhost/json"
+
+s, and so forth.
 
   
 
@@ -790,6 +880,52 @@ ADD ./target//target/com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 ```
   
 our worker service is complete now next step is to create webui to view graphical representation of the worker service  in browser
+
+
+<h2>**Web UI**</h2>
+
+Download website code from [here](https://github.com/fenago/microservices/blob/master/coin/webui.zip) and unzip it to your working directory 
+
+Now let look at webui folder
+
+1, webui.js
+	This our server file built in express framework it when open browser and go to the link   it will get the data from redis and display on browser update every second  .if you want you can change index.html in files folder to make your own page
+	
+```
+    var express = require('express');
+var app = express();
+var redis = require('redis');
+
+var client = redis.createClient(6379, 'redis');
+client.on("error", function (err) {
+    console.error("Redis error", err);
+});
+
+app.get('/', function (req, res) {
+    res.redirect('/index.html');
+});
+
+app.get('/json', function (req, res) {
+    client.hlen('wallet', function (err, coins) {
+        client.get('hashes', function (err, hashes) {
+            var now = Date.now() / 1000;
+            res.json( {
+                coins: coins,
+                hashes: hashes,
+                now: now
+            });
+        });
+    });
+});
+
+app.use(express.static('files'));
+
+var server = app.listen(80, function () {
+    console.log('WEBUI running on port 80');
+});
+
+```
+in browser you can also get how many coin are found till now by using this link 'localhost/json"
 
 
 
