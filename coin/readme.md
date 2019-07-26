@@ -934,6 +934,17 @@ var server = app.listen(80, function () {
 });
 
 ```
+1, DockerFile
+```
+FROM node:4-slim
+RUN npm install express
+RUN npm install redis
+COPY files/ /files/
+COPY webui.js /
+CMD ["node", "webui.js"]
+EXPOSE 80
+```
+
 in browser you can also get how many coin are found till now by using this link 'localhost/json"
 
 Now go to your  browser and enter `localhost:8000` you will see the graph which is updating the hashes every second
