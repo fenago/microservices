@@ -173,7 +173,7 @@ public class RngServiceApplication {
 
 ```
 
-java -jar target/rngService-0.0.1-SNAPSHOT.jar
+java -jar target/rng-0.0.1-SNAPSHOT.jar
 
 ``````
 
@@ -209,10 +209,10 @@ MAINTAINER xyz@email.com
 EXPOSE 8080
 
 #default command to run jar
-CMD java -jar /target/rngService-0.0.1-SNAPSHOT.jar
+CMD java -jar /target/rng-0.0.1-SNAPSHOT.jar
 
 #copy hello world to docker image
-ADD ./target/rngService-0.0.1-SNAPSHOT.jar /target/rngService-0.0.1-SNAPSHOT.jar
+ADD ./target/rng-0.0.1-SNAPSHOT.jar /target/rng-0.0.1-SNAPSHOT.jar
 
 ```
   
