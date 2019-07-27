@@ -47,7 +47,8 @@
 ![https://github.com/fenago/microservices/blob/master/dockercoins-diagram.svg](https://github.com/fenago/microservices/blob/master/dockercoins-diagram.svg "Logo Title Text 1")
 <h2>**How to complete this lab**</h2>
 
-#           ***Random Number Generator***
+#                                              ***Part 1***
+<h2>**Random Number Generator**</h2>
 
 Create a Spring Starter Project for rng service
 
@@ -248,9 +249,9 @@ Now your random generator service container is up and running you can see again 
 
   
 
-Create a Spring Starter Project for rng service
 
-  
+  #                                              ***Part 2***
+
 
 <h2>**Create a Hashing Number Generator microservice**</h2>
 
@@ -437,6 +438,7 @@ Now your random generator service container is up and running you can see again 
 
 
   
+  #                                              ***Part 3***
 
 <h2>**Create  worker microservice**</h2>
 
@@ -646,6 +648,7 @@ public class Worker implements Runnable {
  
   
 
+
 <h2>**calling worker thread from main class**</h2>
 
   
@@ -722,6 +725,7 @@ ADD ./target//target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-de
   
 our worker service is complete now next step is to create webui to view graphical representation of the worker service  in browser
 
+  #                                              ***Part 4***
 
 <h2>**Web UI**</h2>
 
@@ -776,6 +780,8 @@ COPY webui.js /
 CMD ["node", "webui.js"]
 EXPOSE 80
 ```
+  #                                              ***Part 5***
+
 <h2>**Time to compose all the docker in one file**</h2>
 
 This our final step create a new file `docker-compose.yml` in your mircservice folder and edit it as following
