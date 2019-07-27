@@ -61,11 +61,11 @@ Create a new controller for your Spring application:
   
   
 
-src/main/java/com/rnd/service/HelloController.java (or wherever your Controller resides)
+src/main/java/com/learningvoyage/rngservice/HelloController.java (or wherever your Controller resides)
 
 ```
 
-package com.rnd.service;
+package com.learningvoyage.rngservice;
 
 
 import org.springframework.web.bind.annotation.RestController;
@@ -113,11 +113,11 @@ Although it is possible to package this service as a traditional [WAR](https://s
 
   
 
-src/main/java/com/rnd/service/RngServiceApplication.java
+src/main/java/com/learningvoyage/rngservice/RngServiceApplication.java
 
 ```
 
-package com.rnd.service;
+package com.learningvoyage.rngservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -259,11 +259,11 @@ Create a new controller for your Spring application:
   
   
 
-src/main/java/com/hasher/service/HelloController.java (or wherever your Controller resides)
+src/main/java/com/learningvoyage/hasherservice/HelloController.java (or wherever your Controller resides)
 
 ```
 
-package com.hasher.service;
+package com.learningvoyage.hasherservice;
 
 
 import org.springframework.web.bind.annotation.RestController;
@@ -328,11 +328,11 @@ public class HelloController {
 
   
 
-src/main/java/com/hasher/service/HasherServiceApplication.java
+src/main/java/com/learningvoyage/hasherservice/HasherServiceApplication.java
 
 ```
 
-package com.hasher.service;
+package com.learningvoyage.hasherservice;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -455,8 +455,8 @@ pom.xml
 ```
 	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.worker.service</groupId>
-  <artifactId>com.worker.service</artifactId>
+  <groupId>com.learningvoyage.workerservice</groupId>
+  <artifactId>com.learningvoyage.workerservice</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>worker</name>
   	<dependencies>
@@ -480,7 +480,7 @@ pom.xml
   <configuration>
     <archive>
       <manifest>
-        <mainClass>com.worker.service.main</mainClass>
+        <mainClass>com.learningvoyage.workerservice.main</mainClass>
       </manifest>
     </archive>
     <descriptorRefs>
@@ -514,11 +514,11 @@ Create worker java worker class and write the following code :
   
   
 
-src/main/java/com/worker/service/worker.java (this is our worker thread
+src/main/java/com/learningvoyage/workerservice/worker.java (this is our worker thread
 
 ```
 
-package com.worker.service;
+package com.learningvoyage.workerservice;
 
 
 
@@ -563,73 +563,7 @@ public class Worker implements Runnable {
 				} catch (InterruptedExceptipackage com.hasher.service;
 
 
-import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.util.Base64;
-
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-add jedis and spring library in you maven project pomadd jedis and spring library in you maven project pom
-@RestController
-public class HelloController {
-    
-	// hasher........................//////////////////////////////////////////////////////////////
-				
-	            @RequestMapping("/hasher")
-				@ResponseBody
-				String hellohasher() {
-					return "hasher running on hasher";
-				}
-				@RequestMapping("/hasher/{data}")
-				@ResponseBody
-				
-				public String gethash(
-						  @PathVariable("data") String data) {
-					MessageDigest digest;
-					try {
-						digest = MessageDigest.getInstance("SHA-256");
-						byte[] hash = digest.digest(data.getBytes(StandardCharsets.UTF_8));
-						  return  Base64.getEncoder().encodeToString(hash);
-		
-
-    
-}
-				
-					  
-	
-
-    
-}
-				} catch (NoSuchAlgorithmException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-	
-
-    
-}
-				return "error............";
-					
-					
-						}
-
-
-
-    
-}on e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-		}
-
-	}
 
 	private void work_loop(int interval) {
 
@@ -717,11 +651,11 @@ public class HelloController {
 
   
 
-src/main/java/com/worker/service/main.java
+src/main/java/com/learningvoyage/workerservice/main.java
 
 ```
 
-package com.worker.service;
+package com.learningvoyage.workerservice;
 
 
 public class main {
@@ -750,11 +684,11 @@ public class main {
 
   
 
- you can build the JAR file with `./mvn clean package`inside the folder. You will see two jar inside target folder newly created `com.worker.service-0.0.1-SNAPSHOT.jar` and   `com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
+ you can build the JAR file with `./mvn clean package`inside the folder. You will see two jar inside target folder newly created `com.learningvoyage.workerservice-0.0.1-SNAPSHOT.jar` and   `com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
 data
   we will use second one with all dependencies
-  `com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
+  `com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
 
   
@@ -776,10 +710,10 @@ MAINTAINER dev.asadriaz@gmail.com
 
 
 #default command
-CMD java -jar /target/com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+CMD java -jar /target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 #copy hello world to docker image
-ADD ./target//target/com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar /target//target/com.worker.service-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+ADD ./target//target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar /target//target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 ```
   
