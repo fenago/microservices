@@ -318,7 +318,6 @@ public class HelloController {
 
     
 }
-
 ```
 
  
@@ -332,7 +331,7 @@ public class HelloController {
 
   
 
-src/main/java/com/learningvoyage/hasherservice/HasherServiceApplication.java
+src/main/java/com/learningvoyage/hasherservice/HasherApplication.java
 
 ```
 
@@ -346,10 +345,10 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 @SpringBootApplication
-public class HasherServiceApplication {
+public class HasherApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HasherServiceApplication.class, args);
+		SpringApplication.run(HasherApplication.class, args);
 	}
 	
 	
@@ -378,7 +377,7 @@ public class HasherServiceApplication {
 
 ```
 
-java -jar target/hasherService-0.0.1-SNAPSHOT.jar
+java -jar target/hasher-0.0.1-SNAPSHOT.jar
 
 ``````
 
@@ -409,10 +408,10 @@ MAINTAINER xyz@email.com
 EXPOSE 8080
 
 #default command to run jar
-CMD java -jar /target/hasherService-0.0.1-SNAPSHOT.jar
+CMD java -jar /target/hasher-0.0.1-SNAPSHOT.jar
 
 #copy hello world to docker image
-ADD ./target/hasherService-0.0.1-SNAPSHOT.jar /target/hasherService-0.0.1-SNAPSHOT.jar
+ADD ./target/hasher-0.0.1-SNAPSHOT.jar /target/hasher-0.0.1-SNAPSHOT.jar
 
 ```
   
