@@ -99,6 +99,8 @@ public class HelloController {
 	    
 }
 
+
+
 ```
 
   *  `@RequestMapping` his annotation maps HTTP requests to handler methods of MVC and REST controllers with input coming from request (as you can see "rng/{how many}"   ).
@@ -113,11 +115,12 @@ Although it is possible to package this service as a traditional [WAR](https://s
 
   
 
-src/main/java/com/learningvoyage/rngservice/RngServiceApplication.java
+src/main/java/com/learningvoyage/rngservice/RngApplication.java
 
 ```
 
 package com.learningvoyage.rngservice;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -127,15 +130,16 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @ComponentScan
 @SpringBootApplication
-public class RngServiceApplication {
+public class RngApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RngServiceApplication.class, args);
+		SpringApplication.run(RngApplication.class, args);
 	}
 	
 	
 
 }
+
 
 ```
 
