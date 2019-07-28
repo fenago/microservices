@@ -458,14 +458,30 @@ add two dependency in your pom so that it should download the required library
 pom.xml
 
 ```
-	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.learningvoyage.workerservice</groupId>
-  <artifactId>com.learningvoyage.workerservice</artifactId>
+
+  <groupId>com.learningvoyage</groupId>
+  <artifactId>worker</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
   <name>worker</name>
-  	<dependencies>
-	   <dependency>
+  <url>http://maven.apache.org</url>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
 		    <groupId>org.springframework</groupId>
 		    <artifactId>spring-web</artifactId>
 		    <version>4.3.1.RELEASE</version>
@@ -476,16 +492,15 @@ pom.xml
 		    <version>2.9.0</version>
 		    <type>jar</type>
 		</dependency>
-
-	</dependencies>
-	<build>
+  </dependencies>
+<build>
   <plugins>
   <plugin>
   <artifactId>maven-assembly-plugin</artifactId>
   <configuration>
     <archive>
       <manifest>
-        <mainClass>com.learningvoyage.workerservice.main</mainClass>
+        <mainClass>com.learningvoyage.worker.App</mainClass>
       </manifest>
     </archive>
     <descriptorRefs>
@@ -507,8 +522,10 @@ pom.xml
 </build>
 </project>
 
-```
 
+
+```
+we added build property(to build jar with all depandency)  adn libraries(redis,spring)
 Save and update your project with maven........
 
 
@@ -519,11 +536,11 @@ Create worker java worker class and write the following code :
   
   
 
-src/main/java/com/learningvoyage/workerservice/worker.java (this is our worker thread
+src/main/java/com/learningvoyage/worker/Worker.java (this is our worker thread
 
 ```
 
-package com.learningvoyage.workerservice;
+package com.learningvoyage.worker;
 
 
 
@@ -565,7 +582,10 @@ public class Worker implements Runnable {
 				try {
 					Thread.sleep(1000); // restart  the loop after 1sec
 					System.out.println("trying again ............. "+e.getMessage()+" "+ e.getCause());
-				} catch (InterruptedExceptipackage com.hasher.service;
+				} catch (InterruptedException  ee) {
+					
+				}
+			}}}
 
 
 
@@ -661,17 +681,16 @@ src/main/java/com/learningvoyage/workerservice/main.java
 
 ```
 
-package com.learningvoyage.workerservice;
+package com.learningvoyage.worker;
 
 
-public class main {
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Thread worker = new Thread (new Worker());
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	Thread worker = new Thread (new Worker());
 		worker.start();
-	}
-
+    }
 }
 
 ```
