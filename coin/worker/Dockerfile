@@ -2,12 +2,12 @@
 FROM openjdk:8-jdk-alpine
 
 #maintainer 
-MAINTAINER dev.asadriaz@gmail.com
+MAINTAINER xyz@email.com
 
 
 
 #default command
-CMD java -jar /data/com.worker.service-0.0.1-SNAPSHOT.jar
+CMD java -jar /target/worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 #copy hello world to docker image
-ADD ./data/com.worker.service-0.0.1-SNAPSHOT.jar /data/com.worker.service-0.0.1-SNAPSHOT.jar
+ADD ./target/worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar /target/worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar

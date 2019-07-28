@@ -1,2 +1,2 @@
-com/worker/service/main.class
-com/worker/service/Worker.class
+com/learningvoyage/worker/App.class
+com/learningvoyage/worker/Worker.class

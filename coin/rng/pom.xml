@@ -8,11 +8,11 @@
 		<version>2.1.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>rngSerevice</artifactId>
+	<groupId>com.learningvoyage.rngservice</groupId>
+	<artifactId>rng</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>rngSerevice</name>
-	<description>Random Number Generator Service</description>
+	<name>rng</name>
+	<description>rngService</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -31,15 +31,13 @@
 		</dependency>
 	</dependencies>
 
-	
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

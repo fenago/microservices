@@ -8,11 +8,11 @@
 		<version>2.1.6.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>hasherSerevice</artifactId>
+	<groupId>com.learningvoyage.hasherservice</groupId>
+	<artifactId>hasher</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hasherSerevice</name>
-	<description>Hasing number Service</description>
+	<name>hasher</name>
+	<description>hasherService</description>
 
 	<properties>
 		<java.version>1.8</java.version>
