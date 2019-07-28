@@ -877,7 +877,7 @@ Now go to your  browser and enter `localhost:8000` you will see the graph which 
 To find how many coin found till now go to link `localhost:8000/json`
 and you will see json object  representing total number of coin found total hashes down till now you can  refresh the page to get update json again
 
- ![https://github.com/fenago/microservices/blob/master/coin/mdimg/10.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/10.png "Logo Title Text 1")
+ ![https://github.com/fenago/microservices/blob/master/coin/mdimg/12.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/12.png "Logo Title Text 1")
   ![https://github.com/fenago/microservices/blob/master/coin/mdimg/11.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/11.png "Logo Title Text 1")
 
 
