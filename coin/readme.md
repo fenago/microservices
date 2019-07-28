@@ -371,7 +371,7 @@ public class HasherApplication {
 
   
 
- you can build the JAR file with `./mvn clean package`inside the folder. Then you can run the JAR file:
+ you can build the JAR file with `mvn clean install`inside the folder from terminal. Then you can run the JAR file:
 
   
   
@@ -709,11 +709,11 @@ public class App
 
   
 
- you can build the JAR file with `./mvn clean package`inside the folder. You will see two jar inside target folder newly created `com.learningvoyage.workerservice-0.0.1-SNAPSHOT.jar` and   `com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
+ you can build the JAR file with `./mvn clean install`inside the folder. You will see two jar inside target folder newly created `worker-0.0.1-SNAPSHOT.jar` and   `worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
 data
   we will use second one with all dependencies
-  `com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
+  `worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar`
 
 
   
@@ -730,15 +730,15 @@ Now create a text file and name it  Dockerfile  and add following lines
 FROM openjdk:8-jdk-alpine
 
 #maintainer 
-MAINTAINER dev.asadriaz@gmail.com
+MAINTAINER xyz@email.com
 
 
 
 #default command
-CMD java -jar /target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+CMD java -jar /target/worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 #copy hello world to docker image
-ADD ./target//target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar /target//target/com.learningvoyage.workerservice-0.0.1-SNAPSHOT-jar-with-dependencies.jar
+ADD ./target/worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar /target/worker-0.0.1-SNAPSHOT-jar-with-dependencies.jar
 
 ```
   
