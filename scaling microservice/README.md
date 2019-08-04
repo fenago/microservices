@@ -41,3 +41,13 @@ Ok, so maybe you are asking yourself, “How could Kubernetes help me?” Kubern
 ● A framework responsible for ensuring that a specific number of pod replicas are scheduled and running at any given time is a “replication controller.”
 
 ● The key-value tags (i.e. the names) assigned to identify pods, services, and replication controllers are known as “labels.”
+
+
+<h2>Part 1</h2>
+in this part we are going to develop a docker image of  simple spring boot  application and then we will install it to  Kubernetes locally (Minikube).
+According to official documentation (https://kubernetes.io/docs/setup/minikube/):
+
+“Minikube is a tool that makes it easy to run Kubernetes locally. Minikube runs a single-node Kubernetes cluster inside a VM on your laptop for users looking to try out Kubernetes or develop with it day-to-day.”
+ We’ll also need Kubectl, which  is a command line tool that allows us to manage and deploy applications on Kubernetes. It is also important to mention that Minikube works with Virtual Box by default, but if you want to use another VM driver, you can do so.Minikube is an open source tool that was developed to enable developers and system administrators to run a single cluster of Kubernetes on their local machine. Minikube starts a single node kubernetes cluster locally with small resource utilization. This is ideal for development tests and POC purposes,
+In a nutshell, Minikube packages and configures a Linux VM, then installs Docker and all Kubernetes components into it.
+<h3>installing minikube and kubectl on ubuntu</h3>
