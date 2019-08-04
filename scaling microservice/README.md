@@ -51,3 +51,68 @@ According to official documentation (https://kubernetes.io/docs/setup/minikube/)
  We’ll also need Kubectl, which  is a command line tool that allows us to manage and deploy applications on Kubernetes. It is also important to mention that Minikube works with Virtual Box by default, but if you want to use another VM driver, you can do so.Minikube is an open source tool that was developed to enable developers and system administrators to run a single cluster of Kubernetes on their local machine. Minikube starts a single node kubernetes cluster locally with small resource utilization. This is ideal for development tests and POC purposes,
 In a nutshell, Minikube packages and configures a Linux VM, then installs Docker and all Kubernetes components into it.
 <h3>installing minikube and kubectl on ubuntu</h3>
+Step 1: Update system
+
+Run the following commands to update all system packages to the latest release:
+```
+sudo apt-get update
+sudo apt-get install apt-transport-https
+sudo apt-get upgrade
+```
+Step 2: Install  VirtualBox 
+
+ install VirtualBox using:
+
+```
+sudo apt install virtualbox virtualbox-ext-pack
+```
+Step 3: Download minikube
+
+You need to download the minikube binary. I will put the binary under /usr/local/bin directory since it is inside $PATH.
+
+```wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+chmod +x minikube-linux-amd64
+sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+```
+Confirm version installed
+```
+$ minikube version
+minikube version: v0.28.0
+```
+Step 4: Install kubectl on Ubuntu 18.04
+
+We need kubectl which is a command line tool used to deploy and manage applications on Kubernetes
+```
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+```
+Add Kubernetes apt repository:
+```
+echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+```
+Update apt index and install kubectl
+```
+sudo apt update
+sudo apt -y install kubectl
+```
+Check version:
+```
+# kubectl version -o json 
+{
+  "clientVersion": {
+    "major": "1",
+    "minor": "10",
+    "gitVersion": "v1.10.4",
+    "gitCommit": "5ca598b4ba5abb89bb773071ce452e33fb66339d",
+    "gitTreeState": "clean",
+    "buildDate": "2018-06-06T08:13:03Z",
+    "goVersion": "go1.9.3",
+    "compiler": "gc",
+    "platform": "linux/amd64"
+  }
+}
+```
+After installing Minikube and Kubectl, we should start the Minikube cluster with the following command:
+
+```minikube start```
+
+Minikube created a virtual machine, and inside it, a cluster is now running.
