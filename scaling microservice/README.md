@@ -25,11 +25,19 @@ And since Spring Boot has excellent integration with JSM, you could use that to 
 
 Ok, so maybe you are asking yourself, “How could Kubernetes help me?” Kubernetes helped us with one constant in the life of every application: change. The only applications that do not change are dead ones; as long as an application is alive, new requirements will come in, more code will be shipped, and it will be packaged and deployed. This is the normal lifecycle of all applications, and developers around the world have to take this reality into account when looking for solutions.
 <h2>how Kubernetes is structured, </h2>
+
 ● The smallest unit is the node. A node is a worker machine, a VM or physical machine, depending on the cluster.
+
 ● A group of nodes is a cluster.
+
 ● A container image wraps an application and its dependencies.
+
 ● One or more containers are wrapped into a higher-level structure called a “pod.”
+
 ● Pods are usually managed by one more layer of abstraction: deployment.
+
 ● A group of pods working as a load balancer to direct traffic to running containers is called “services.”
+
 ● A framework responsible for ensuring that a specific number of pod replicas are scheduled and running at any given time is a “replication controller.”
+
 ● The key-value tags (i.e. the names) assigned to identify pods, services, and replication controllers are known as “labels.”
