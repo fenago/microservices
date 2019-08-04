@@ -116,3 +116,6 @@ After installing Minikube and Kubectl, we should start the Minikube cluster with
 ```minikube start```
 
 Minikube created a virtual machine, and inside it, a cluster is now running.
+
+If we want to validate the state of Kubernetes resources in our cluster, we can use Kubernetes Dashboard; the command is `minikube dashboard` A web browser will be opened with the following dashboard:
+![https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png]https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png "Logo Title Text 1")
