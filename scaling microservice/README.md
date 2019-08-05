@@ -50,7 +50,7 @@ According to official documentation (https://kubernetes.io/docs/setup/minikube/)
 “Minikube is a tool that makes it easy to run Kubernetes locally. Minikube runs a single-node Kubernetes cluster inside a VM on your laptop for users looking to try out Kubernetes or develop with it day-to-day.”
  We’ll also need Kubectl, which  is a command line tool that allows us to manage and deploy applications on Kubernetes. It is also important to mention that Minikube works with Virtual Box by default, but if you want to use another VM driver, you can do so.Minikube is an open source tool that was developed to enable developers and system administrators to run a single cluster of Kubernetes on their local machine. Minikube starts a single node kubernetes cluster locally with small resource utilization. This is ideal for development tests and POC purposes,
 In a nutshell, Minikube packages and configures a Linux VM, then installs Docker and all Kubernetes components into it.
-<h3>installing minikube and kubectl on ubuntu</h3>
+
 
 
 <h2>Step 1   **Random Number Generator**</h2>
@@ -253,9 +253,9 @@ Now your random generator service container is up and running you can see again 
 
 
 
+<h3>installing minikube and kubectl on ubuntu</h3>
 
-
-Step 2: Update system 
+Step 1: Update system 
 
 
 
@@ -266,14 +266,14 @@ sudo apt-get update
 sudo apt-get install apt-transport-https
 sudo apt-get upgrade
 ```
-Step 3: Install  VirtualBox 
+Step 2: Install  VirtualBox 
 
  install VirtualBox using:
 
 ```
 sudo apt install virtualbox virtualbox-ext-pack
 ```
-Step 4: Download minikube
+Step 3: Download minikube
 
 You need to download the minikube binary. I will put the binary under /usr/local/bin directory since it is inside $PATH.
 
@@ -286,7 +286,7 @@ Confirm version installed
 $ minikube version
 minikube version: v0.28.0
 ```
-Step 5: Install kubectl on Ubuntu 18.04
+Step 4: Install kubectl on Ubuntu 18.04
 
 We need kubectl which is a command line tool used to deploy and manage applications on Kubernetes
 ```
@@ -326,3 +326,7 @@ Minikube created a virtual machine, and inside it, a cluster is now running.
 
 If we want to validate the state of Kubernetes resources in our cluster, we can use Kubernetes Dashboard; the command is `minikube dashboard` A web browser will be opened with the following dashboard:
 ![https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png](https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png "Logo Title Text 1")
+
+
+<h3>Deploy the app on Kubernetes</h3>
+
