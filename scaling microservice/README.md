@@ -273,18 +273,31 @@ Step 2: Install  VirtualBox
 ```
 sudo apt install virtualbox virtualbox-ext-pack
 ```
-Step 3: Download minikube
+Step 3: Download and install minikube
 
-You need to download the minikube binary. I will put the binary under /usr/local/bin directory since it is inside $PATH.
+ 
 
-```wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-chmod +x minikube-linux-amd64
-sudo mv minikube-linux-amd64 /usr/local/bin/minikube
+First, you will need to download the latest version of Minikube to your system. You can download it from their official websites with the following command:
+
 ```
-Confirm version installed
+wget https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 ```
-$ minikube version
-minikube version: v0.28.0
+Once the download is completed, copy the downloaded file under /usr/local/bin with the following command:
+```
+sudo cp minikube-linux-amd64 /usr/local/bin/minikube
+```
+Next, give execution permission to the minikube with the following command:
+```
+sudo chmod 755 /usr/local/bin/minikube
+```
+Next, check the version of Minikube with the following command:
+```
+minikube version
+```
+You should see the following output:
+```
+minikube version: v0.34.1
+
 ```
 Step 4: Install kubectl on Ubuntu 18.04
 
