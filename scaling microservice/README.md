@@ -53,8 +53,7 @@ In a nutshell, Minikube packages and configures a Linux VM, then installs Docker
 <h3>installing minikube and kubectl on ubuntu</h3>
 
 
-#                                              ***Part 1***
-<h2>**Random Number Generator**</h2>
+<h2>Step 1   **Random Number Generator**</h2>
 
 Create a Spring Starter Project for rng service
 
