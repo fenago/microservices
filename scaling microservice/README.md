@@ -296,7 +296,7 @@ minikube version
 ```
 You should see the following output:
 ```
-minikube version: v0.34.1
+minikube version: v1.2.0
 
 ```
 Step 4: Install kubectl on Ubuntu 18.04
