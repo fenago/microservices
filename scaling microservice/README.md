@@ -43,7 +43,7 @@ Ok, so maybe you are asking yourself, “How could Kubernetes help me?” Kubern
 ● The key-value tags (i.e. the names) assigned to identify pods, services, and replication controllers are known as “labels.”
 
 
-<h2>Part 1</h2>
+<h1>                                               ***Part 1***                                                   </h1>
 in this part we are going to develop a docker image of  simple spring boot  application and then we will install it to  Kubernetes locally (Minikube).
 According to official documentation (https://kubernetes.io/docs/setup/minikube/):
 
