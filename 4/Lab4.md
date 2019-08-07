@@ -4,21 +4,21 @@ Lab 4 - Create a RESTful Service and Endpoint
 
 1. One can edit `Application.java` under `src/main/java` and add a RESTful service implementation. The RESTful service is exactly the same as what was done in the previous project. Append the following code at the end of the `Application.java` file:
 2. 
-3. `@RestController \
-class GreetingController{ \
-  @RequestMapping("/") \
-  Greet greet(){ \
-    return new Greet("Hello World!"); \
-  } \
-} \
-class Greet { \
-  private String message; \
-public Greet() {} \
- \
-  public Greet(String message) { \
-    this.message = message; \
-  } \
-//add getter and setter \
+3. `@RestController
+class GreetingController{
+  @RequestMapping("/")
+  Greet greet(){
+    return new Greet("Hello World!");
+  }
+}
+class Greet {
+  private String message;
+public Greet() {}
+ 
+  public Greet(String message) {
+    this.message = message;
+  }
+//add getter and setter
 }   `
 4. To run, navigate to **Run As** | **Spring Boot App**. Tomcat will be started on the `8080` port:
 
