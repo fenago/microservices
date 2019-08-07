@@ -271,8 +271,10 @@ Step 2: Install  VirtualBox
  install VirtualBox using:
 
 ```
-sudo apt install virtualbox virtualbox-ext-pack
+sudo apt-get install virtualbox
 ```
+
+
 Step 3: Download and install minikube
 
  
@@ -331,6 +333,10 @@ Check version:
   }
 }
 ```
+Start the minikube cluster. This will take a while, expecting the output below. We are using the virtualbox driver as an example. But it should be similar to other drivers.
+```minikube config set vm-driver virtualbox```
+this will configure virtual machine for local instance of minikube 
+
 After installing Minikube and Kubectl, we should start the Minikube cluster with the following command:
 
 ```minikube start```
@@ -340,16 +346,6 @@ Minikube created a virtual machine, and inside it, a cluster is now running.
 If we want to validate the state of Kubernetes resources in our cluster, we can use Kubernetes Dashboard; the command is `minikube dashboard` A web browser will be opened with the following dashboard:
 ![https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png](https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png "Logo Title Text 1")
 
-<h4>some error </h4>
-if you face some error when calling dashboard try the following command one by one 
-
-`minikube stop`
-
-`minikube delete`
-
-`rm -rf  ~/.minikube`
-
-`minikube start --vm-driver=none --docker-env HTTP_PROXY=http://myproxy.com:8080 --docker-env HTTPS_PROXY=http://myproxy.com:8080 --docker-env NO_PROXY=127.0.0.1`
 
 and then after minikube start verify it by calling 
 
@@ -374,6 +370,19 @@ It is important to clarify that Minikube only has one cluster with its respectiv
 
 `pic`
 
+
+
+
+Minikube comes with its own docker daemon. Run the following so that we can work with that docker daemon on our machine.
+for this close the terminal and then open again and run following command it will configure minikube to use docker-environment from inside 
+`eval $(minikube docker-env)`
+
+now we need to build docker image for minikube. from terminal fo to rng folder and build docker image again with same command as you did previoulsy 
+# Build image
+`docker build -t foo:0.0.1 .`
+foo is the name of image
+
+
 For this post, we only need a master node, but obviously in production mode we would probably have to use at least three nodes: one for the master, and two nodes for all the things related to application redundancy.(we will further  disscuss in  part2 ) 
 command for deployment is "sudo kubectl run {DEPLOYMENT_NAME} --image= {YOUR_IMAGE} --port=8080"
 In order to create a Kubernetes Deployment, we will run the following command:
@@ -381,4 +390,58 @@ In order to create a Kubernetes Deployment, we will run the following command:
 "sudo kubectl run hellokubernate --image= {YOUR_IMAGE} --port=8080"
 
 
-The command “kubectl run” only needs the {DEPLOYMENT_NAME} to work, but if you want to pull a Docker image inside this deployment, you should use the “–image” option, with which you can specify the Docker image to be used.
+The command “kubectl run” only needs the {DEPLOYMENT_NAME} to work, but if you want to pull a Docker image inside this deployment, you should use the --image” option, with which you can specify the Docker image to be used.
+`sudo kubectl run hello-fooo --image=foo:0.0.1 --image-pull-policy=Never`
+
+now check if everything is running by executing following command
+`sudo kubectl get pods`
+
+you will see the output like 
+
+NAME                         READY   STATUS              RESTARTS   AGE
+hello-fooo-bf848b5d9-wlxmm   1/1     Running             0          17m
+
+if status is "Running" everything is working fine else something went wrong during image pulling from docker
+Currently, our application isn’t accessible from outside the cluster; it is only running on the Kubernetes cluster.  We need to create a “bridge” between our application and the outside world, something that can be done by using a service. Let’s go ahead and create our service, because we want everyone to be able to use our application:
+
+`sudo kubectl expose deployment/hello-fooo --type="NodePort" --port 8080`
+
+The logic behind the above command is the following: we want to expose our deployment to the world through the NodePort (which will be assigned when the service is created). After you execute the command, a console message will appear:  “service ‘hello-fooo’ exposed,” which means that the application can be accessed from outside the cluster.
+
+To do this, in addition to obtaining more details about our service, we can use the following command:
+
+`kubectl describe services/hello-fooo`
+ you will see output like 
+ 
+ Name:                     hello-fooo
+Namespace:                default
+Labels:                   run=hello-fooo
+Annotations:              <none>
+Selector:                 run=hello-fooo
+Type:                     NodePort
+IP:                       10.100.22.168
+Port:                     <unset>  8080/TCP
+TargetPort:               8080/TCP
+NodePort:                 <unset>  30360/TCP
+Endpoints:                172.17.0.7:8080
+Session Affinity:         None
+External Traffic Policy:  Cluster
+Events:                   <none>
+	
+here line `NodePort:   <unset>  30360/TCP` showing that our service can access from port "30360"
+
+ Remember that the application lives inside a Pod, and we’ve created a service that allows us to access the application from outside the cluster. Use the following command to see which Minikube IP you have:
+
+`minikube ip`
+my ip is "192.168.99.100" check your and open the browser and 
+In my case, the IP is http://192.168.99.100/ and the NodePort is 30961. Go to your favorite browser and type:  http://192.168.99.100:30961/rng.(change your ip to whatever  minikube ip command output is) You can see that the application is running and can be accessed from outside the Kubernetes cluster:
+
+`img`
+
+also you can generate random number here by `http://192.168.99.100:30961/rng/32`
+
+<h3>Conclusion</h3>
+
+We implemented and deployed our application on the Kubernetes cluster; in addition, we used Kubectl to execute commands on the cluster. We should now have a basic understanding of how Kubernetes works, so feel free to create more deployments and communicate with them by using services.
+
+in next part we will create  some advanced cluster with daily life  example
