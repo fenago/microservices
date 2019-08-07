@@ -334,7 +334,10 @@ Check version:
 }
 ```
 Start the minikube cluster. This will take a while, expecting the output below. We are using the virtualbox driver as an example. But it should be similar to other drivers.
-```minikube config set vm-driver virtualbox```
+
+```
+minikube config set vm-driver virtualbox
+```
 this will configure virtual machine for local instance of minikube 
 
 After installing Minikube and Kubectl, we should start the Minikube cluster with the following command:
@@ -376,8 +379,8 @@ It is important to clarify that Minikube only has one cluster with its respectiv
 Minikube comes with its own docker daemon. Run the following so that we can work with that docker daemon on our machine.
 for this close the terminal and then open again and run following command it will configure minikube to use docker-environment from inside 
 `eval $(minikube docker-env)`
-
-now we need to build docker image for minikube. from terminal fo to rng folder and build docker image again with same command as you did previoulsy 
+<h3>create docker image of our spring bott application for kubernete</h3>
+now we need to build docker image for minikube. from terminal go to rng folder and build docker image again with same command as you did previously 
 # Build image
 `docker build -t foo:0.0.1 .`
 foo is the name of image
@@ -385,10 +388,6 @@ foo is the name of image
 
 For this post, we only need a master node, but obviously in production mode we would probably have to use at least three nodes: one for the master, and two nodes for all the things related to application redundancy.(we will further  disscuss in  part2 ) 
 command for deployment is "sudo kubectl run {DEPLOYMENT_NAME} --image= {YOUR_IMAGE} --port=8080"
-In order to create a Kubernetes Deployment, we will run the following command:
-
-"sudo kubectl run hellokubernate --image= {YOUR_IMAGE} --port=8080"
-
 
 The command “kubectl run” only needs the {DEPLOYMENT_NAME} to work, but if you want to pull a Docker image inside this deployment, you should use the --image” option, with which you can specify the Docker image to be used.
 `sudo kubectl run hello-fooo --image=foo:0.0.1 --image-pull-policy=Never`
