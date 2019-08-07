@@ -8,7 +8,7 @@ MAINTAINER xyz@email.com
 EXPOSE 8080
 
 #default command to run jar
-CMD java -jar /target/hasher-0.0.1-SNAPSHOT.jar
+CMD java -jar ./target/hasher-0.0.1-SNAPSHOT.jar
 
 #copy hello world to docker image
-ADD ./target/hasher-0.0.1-SNAPSHOT.jar /target/hasher-0.0.1-SNAPSHOT.jar
+COPY ./target/hasher-0.0.1-SNAPSHOT.jar /target/hasher-0.0.1-SNAPSHOT.jar
