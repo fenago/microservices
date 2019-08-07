@@ -25,13 +25,15 @@ Lab 6 : Read Custom Property Files
 3. `learningvoyage.customproperty=HiErnesto`
 4. Then, edit the `GreetingController` class as follows:
 5. 
-6. `@Autowired \
-Environment env; \
- \
-Greet greet(){ \
-    logger.info("bootrest.customproperty "+ env.getProperty("bootrest.customproperty")); \
-    return new Greet("Hello World!"); \
-}`
+6. ```
+@Autowired
+Environment env;
+
+Greet greet(){
+    logger.info("bootrest.customproperty "+ env.getProperty("bootrest.customproperty"));
+    return new Greet("Hello World!");
+}
+```
 7. Rerun the application. The log statement prints the custom variable in the console, as follows:
 8. 
 9. `org.rvslab.chapter2.GreetingController   : bootrest.customproperty hello`
