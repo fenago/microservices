@@ -366,3 +366,19 @@ in browser you can see dahshbaord as follow
 
 <h3>Deploy the app on Kubernetes</h3>
 
+First, we should check the information of our cluster:
+
+`sudo kubectl cluster-info`
+
+It is important to clarify that Minikube only has one cluster with its respective node. So, we could check our nodes using the command `sudo kubectl get nodes.` The output looks like this:
+
+`pic`
+
+For this post, we only need a master node, but obviously in production mode we would probably have to use at least three nodes: one for the master, and two nodes for all the things related to application redundancy.(we will further  disscuss in  part2 ) 
+command for deployment is "sudo kubectl run {DEPLOYMENT_NAME} --image= {YOUR_IMAGE} --port=8080"
+In order to create a Kubernetes Deployment, we will run the following command:
+
+"sudo kubectl run hellokubernate --image= {YOUR_IMAGE} --port=8080"
+
+
+The command “kubectl run” only needs the {DEPLOYMENT_NAME} to work, but if you want to pull a Docker image inside this deployment, you should use the “–image” option, with which you can specify the Docker image to be used.
