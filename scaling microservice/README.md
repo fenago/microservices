@@ -340,6 +340,32 @@ Minikube created a virtual machine, and inside it, a cluster is now running.
 If we want to validate the state of Kubernetes resources in our cluster, we can use Kubernetes Dashboard; the command is `minikube dashboard` A web browser will be opened with the following dashboard:
 ![https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png](https://github.com/fenago/microservices/blob/master/scaling%20microservice/dash.png "Logo Title Text 1")
 
+<h4>some error </h4>
+if you face some error when calling dashboard try the following command one by one 
+`
+minikube stop
+`
+`
+minikube delete
+`
+`
+rm -rf  ~/.minikube
+`
+`
+minikube start --vm-driver=none --docker-env HTTP_PROXY=http://myproxy.com:8080 --docker-env HTTPS_PROXY=http://myproxy.com:8080 --docker-env NO_PROXY=127.0.0.1
+`
+and then after minikube start verify it by calling 
+`
+minikube dahsboard
+`
+if you get the folling error then  open browser manually and copy paste the link you see in the error
 
+`
+pic
+`
+in browser you can see dahshbaord as follow
+`
+pic
+`
 <h3>Deploy the app on Kubernetes</h3>
 
