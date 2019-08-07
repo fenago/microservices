@@ -38,14 +38,15 @@ Lab 5 : HATEOAS
 10. Click on **Browse** next to **Root Directory** and select the unzipped folder. Click on **Finish**. This will load the generated Maven project into STS' **Project Explorer**.
 11. Edit the Hateoas`Application.java` file to add a new REST endpoint, as follows:
 12. 
-13. `@RequestMapping("/greeting") \
-@ResponseBody \
-public HttpEntity<Greet> greeting(@RequestParam(value = "name", required = false, defaultValue = "HATEOAS") String name) { \
-       Greet greet = new Greet("Hello " + name); \
-       greet.add(linkTo(methodOn(GreetingController.class).greeting(name)).withSelfRel()); \
- \
-       return new ResponseEntity<Greet>(greet, HttpStatus.OK); \
-}`
+13. ```
+@RequestMapping("/greeting")
+@ResponseBody
+public HttpEntity<Greet> greeting(@RequestParam(value = "name", required = false, defaultValue = "HATEOAS") String name) {
+       Greet greet = new Greet("Hello " + name);
+       greet.add(linkTo(methodOn(GreetingController.class).greeting(name)).withSelfRel());
+ 
+       return new ResponseEntity<Greet>(greet, HttpStatus.OK);
+}```
 14. Note that this is the same `GreetingController` class as in the previous example. However, a method was added this time named `greeting`. In this new method, an additional optional request parameter is defined and defaulted to `HATEOAS`. The following code adds a link to the resulting JSON code. In this case, it adds the link to the same API:
 15. 
 16. `greet.add(linkTo(methodOn(GreetingController.class).greeting(name)).withSelfRel());`
