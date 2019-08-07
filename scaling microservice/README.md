@@ -342,30 +342,27 @@ If we want to validate the state of Kubernetes resources in our cluster, we can 
 
 <h4>some error </h4>
 if you face some error when calling dashboard try the following command one by one 
-`
-minikube stop
-`
-`
-minikube delete
-`
-`
-rm -rf  ~/.minikube
-`
-`
-minikube start --vm-driver=none --docker-env HTTP_PROXY=http://myproxy.com:8080 --docker-env HTTPS_PROXY=http://myproxy.com:8080 --docker-env NO_PROXY=127.0.0.1
-`
+
+`minikube stop`
+
+`minikube delete`
+
+`rm -rf  ~/.minikube`
+
+`minikube start --vm-driver=none --docker-env HTTP_PROXY=http://myproxy.com:8080 --docker-env HTTPS_PROXY=http://myproxy.com:8080 --docker-env NO_PROXY=127.0.0.1`
+
 and then after minikube start verify it by calling 
-`
-minikube dahsboard
-`
+
+`minikube dahsboard`
+
 if you get the folling error then  open browser manually and copy paste the link you see in the error
 
-`
-pic
-`
+
+`pic`
+
 in browser you can see dahshbaord as follow
-`
-pic
-`
+
+`pic`
+
 <h3>Deploy the app on Kubernetes</h3>
 
