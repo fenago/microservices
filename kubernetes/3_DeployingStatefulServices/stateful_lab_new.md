@@ -495,10 +495,11 @@ StatefulSet supports both Non-Cascading and Cascading deletion. In a Non-Cascadi
 
 Non-Cascading Delete
 In one terminal window, watch the Pods in the StatefulSet.
-
+```
 kubectl get pods -w -l app=nginx
+```
 Use kubectl delete to delete the StatefulSet. Make sure to supply the --cascade=false parameter to the command. This parameter tells Kubernetes to only delete the StatefulSet, and to not delete any of its Pods.
-
+```
 kubectl delete statefulset web --cascade=false
 statefulset.apps "web" deleted
 Get the Pods to examine their status.
@@ -519,19 +520,20 @@ NAME      READY     STATUS    RESTARTS   AGE
 web-1     1/1       Running   0          10m
 web-2     1/1       Running   0          7m
 As the web StatefulSet has been deleted, web-0 has not been relaunched.
-
+```
 In one terminal, watch the StatefulSet’s Pods.
-
+```
 kubectl get pods -w -l app=nginx
+```
 In a second terminal, recreate the StatefulSet. Note that, unless you deleted the nginx Service ( which you should not have ), you will see an error indicating that the Service already exists.
-
+```
 kubectl apply -f web.yaml
 statefulset.apps/web created
 service/nginx unchanged
 Ignore the error. It only indicates that an attempt was made to create the nginx Headless Service even though that Service already exists.
-
+```
 Examine the output of the kubectl get command running in the first terminal.
-
+```
 kubectl get pods -w -l app=nginx
 NAME      READY     STATUS    RESTARTS   AGE
 web-1     1/1       Running   0          16m
@@ -545,25 +547,29 @@ web-2     1/1       Terminating   0         3m
 web-2     0/1       Terminating   0         3m
 web-2     0/1       Terminating   0         3m
 web-2     0/1       Terminating   0         3m
+```
 When the web StatefulSet was recreated, it first relaunched web-0. Since web-1 was already Running and Ready, when web-0 transitioned to Running and Ready, it simply adopted this Pod. Since you recreated the StatefulSet with replicas equal to 2, once web-0 had been recreated, and once web-1 had been determined to already be Running and Ready, web-2 was terminated.
 
 Let’s take another look at the contents of the index.html file served by the Pods’ webservers.
-
+```
 for i in 0 1; do kubectl exec -it web-$i -- curl localhost; done
 web-0
 web-1
+```
 Even though you deleted both the StatefulSet and the web-0 Pod, it still serves the hostname originally entered into its index.html file. This is because the StatefulSet never deletes the PersistentVolumes associated with a Pod. When you recreated the StatefulSet and it relaunched web-0, its original PersistentVolume was remounted.
 
 Cascading Delete
 In one terminal window, watch the Pods in the StatefulSet.
-
+```
 kubectl get pods -w -l app=nginx
+```
 In another terminal, delete the StatefulSet again. This time, omit the --cascade=false parameter.
-
+```
 kubectl delete statefulset web
 statefulset.apps "web" deleted
+```
 Examine the output of the kubectl get command running in the first terminal, and wait for all of the Pods to transition to Terminating.
-
+```
 kubectl get pods -w -l app=nginx
 NAME      READY     STATUS    RESTARTS   AGE
 web-0     1/1       Running   0          11m
@@ -577,31 +583,36 @@ web-0     0/1       Terminating   0         12m
 web-1     0/1       Terminating   0         29m
 web-1     0/1       Terminating   0         29m
 web-1     0/1       Terminating   0         29m
+```
 As you saw in the Scaling Down section, the Pods are terminated one at a time, with respect to the reverse order of their ordinal indices. Before terminating a Pod, the StatefulSet controller waits for the Pod’s successor to be completely terminated.
 
 Note that, while a cascading delete will delete the StatefulSet and its Pods, it will not delete the Headless Service associated with the StatefulSet. You must delete the nginx Service manually.
-
+```
 kubectl delete service nginx
 service "nginx" deleted
+```
 Recreate the StatefulSet and Headless Service one more time.
-
+```
 kubectl apply -f web.yaml
 service/nginx created
 statefulset.apps/web created
+```
 When all of the StatefulSet’s Pods transition to Running and Ready, retrieve the contents of their index.html files.
-
+```
 for i in 0 1; do kubectl exec -it web-$i -- curl localhost; done
 web-0
 web-1
+```
 Even though you completely deleted the StatefulSet, and all of its Pods, the Pods are recreated with their PersistentVolumes mounted, and web-0 and web-1 will still serve their hostnames.
 
 Finally delete the web StatefulSet and the nginx service.
-
+```
 kubectl delete service nginx
 service "nginx" deleted
 
 kubectl delete statefulset web
 statefulset "web" deleted
+```
 Pod Management Policy
 For some distributed systems, the StatefulSet ordering guarantees are unnecessary and/or undesirable. These systems require only uniqueness and identity. To address this, in Kubernetes 1.7, we introduced .spec.podManagementPolicy to the StatefulSet API Object.
 
@@ -612,6 +623,7 @@ Parallel Pod Management
 Parallel pod management tells the StatefulSet controller to launch or terminate all Pods in parallel, and not to wait for Pods to become Running and Ready or completely terminated prior to launching or terminating another Pod.
 
 application/web/web-parallel.yaml Copy application/web/web-parallel.yaml to clipboard
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -659,20 +671,25 @@ spec:
       resources:
         requests:
           storage: 1Gi
+```
 Download the example above, and save it to a file named web-parallel.yaml
 
 This manifest is identical to the one you downloaded above except that the .spec.podManagementPolicy of the web StatefulSet is set to Parallel.
 
 In one terminal, watch the Pods in the StatefulSet.
 
+```
 kubectl get po -l app=nginx -w
+```
 In another terminal, create the StatefulSet and Service in the manifest.
-
+```
 kubectl apply -f web-parallel.yaml
 service/nginx created
 statefulset.apps/web created
+```
 Examine the output of the kubectl get command that you executed in the first terminal.
 
+```
 kubectl get po -l app=nginx -w
 NAME      READY     STATUS    RESTARTS   AGE
 web-0     0/1       Pending   0          0s
@@ -683,12 +700,15 @@ web-0     0/1       ContainerCreating   0         0s
 web-1     0/1       ContainerCreating   0         0s
 web-0     1/1       Running   0         10s
 web-1     1/1       Running   0         10s
+```
 The StatefulSet controller launched both web-0 and web-1 at the same time.
 
 Keep the second terminal open, and, in another terminal window scale the StatefulSet.
 
+```
 kubectl scale statefulset/web --replicas=4
 statefulset.apps/web scaled
+```
 Examine the output of the terminal where the kubectl get command is running.
 
 web-3     0/1       Pending   0         0s
@@ -700,8 +720,9 @@ web-3     1/1       Running   0         26s
 The StatefulSet controller launched two new Pods, and it did not wait for the first to become Running and Ready prior to launching the second.
 
 Keep this terminal open, and in another terminal delete the web StatefulSet.
-
+```
 kubectl delete sts web
+```
 Again, examine the output of the kubectl get command running in the other terminal.
 
 web-3     1/1       Terminating   0         9m
@@ -731,6 +752,8 @@ The StatefulSet controller deletes all Pods concurrently, it does not wait for a
 
 Close the terminal where the kubectl get command is running and delete the nginx Service.
 
+```
 kubectl delete svc nginx
 Cleaning up
+```
 You will need to delete the persistent storage media for the PersistentVolumes used in this tutorial. Follow the necessary steps, based on your environment, storage configuration, and provisioning method, to ensure that all storage is reclaimed
