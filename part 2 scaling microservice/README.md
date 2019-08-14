@@ -1,1 +1,40 @@
-this is part 2
+When you design and build applications at scale, you deal with two significant challenges: scalability and robustness.
+
+You should design your service so that even if it is subject to intermittent heavy loads, it continues to operate reliably.
+
+Take the Apple Store as an example.
+
+Every year millions of Apple customers preregister to buy a new iPhone.
+
+That's millions of people all buying an item at the same time.
+
+
+
+
+<h2>Coding a Spring application</h2>
+
+The service has three components: the front-end, the backend and a message broker.
+
+The front-end is a simple Spring Boot web app with the Thymeleaf templating engine.
+
+The backend is a worker consuming messages from a queue.
+
+And since Spring Boot has excellent integration with JMS, you could use that to send and receive asynchronous messages.
+
+You can find a sample project with a front-end and backend application connected to JMS at learnk8s/spring-boot-k8s-hpa.
+
+    Please note that the application is written in Java 10 to leverage the improved Docker container integration.
+
+There's a single code base, and you can configure the project to run either as the front-end or backend.
+
+You should know that the app has:
+
+    a homepage where you can buy items
+    an admin panel where you can inspect the number of messages in the queue
+    a /health endpoint to signal when the application is ready to receive traffic
+    a /submit endpoint that receives submissions from the form and creates messages in the queue
+    a /metrics endpoint to expose the number of pending messages in the queue (more on this later)
+
+The application can function in two modes:
+
+As frontend, the application renders the web page where people can buy items.
