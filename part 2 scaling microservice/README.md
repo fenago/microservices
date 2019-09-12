@@ -85,7 +85,7 @@ The cluster is ready, you packaged your application, perhaps you're ready to dep
 
 Yes, you can finally ask Kubernetes to deploy the applications.
 
-<h1>Deploying your application to Kubernetes<h1>
+<h1>Deploying your application to Kubernetes</h1>
    
  Application has three components:
 
