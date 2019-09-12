@@ -110,7 +110,7 @@ Let's start with ActiveMQ.
 You should create a activemq-deployment.yaml file with the following content:
 
 ```
----
+
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -131,7 +131,7 @@ spec:
         resources:
           limits:
             memory: 512Mi
----
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -162,10 +162,9 @@ The template is verbose but straightforward to read:
    verify that one instance of the database is running with:
    `kubectl get pods -l=app=queue`
     <h2>step5</h2>
-  
-    Create a fe-deployment.yaml file with the following content:
-    ```
-    ---
+Create a `fe-deployment.yaml` file with the following content:
+```
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -212,4 +211,120 @@ spec:
   selector:
     app: frontend
   type: NodePort
-    ```
+```
+The Deployment looks a lot like the previous one.
+
+There're some new fields, though:
+
+    there's a section where you can inject environment variables
+    there's the liveness probe that tells you when the application is ready to accept traffic<>
+    
+    
+<h2>Step 5A</h2>
+create the resources with:
+`kubectl create -f fe-deployment.yaml`
+You can verify that one instance of the front-end application is running with:
+`kubectl get pods -l=app=fe`
+
+
+<h2>Step6</h2>
+Create a `backend-deployment.yaml` file with the following content:
+    
+   ```
+   ---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+      annotations:
+        prometheus.io/scrape: 'true'
+    spec:
+      containers:
+      - name: backend
+        image: spring-boot-hpa
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ACTIVEMQ_BROKER_URL
+          value: "tcp://queue:61616"
+        - name: STORE_ENABLED
+          value: "false"
+        - name: WORKER_ENABLED
+          value: "true"
+        ports:
+          - containerPort: 8080
+        readinessProbe:
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          httpGet:
+            path: /health
+            port: 8080
+        resources:
+          limits:
+            memory: 256Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  ports:
+  - nodePort: 31000
+    port: 80
+    targetPort: 8080
+  selector:
+    app: backend
+  type: NodePort
+   ```
+   <step6a>
+    You can create the resources with:
+    `kubectl create -f backend-deployment.yaml`
+    You can verify that one instance of the backend is running with:
+    `kubectl get pods -l=app=backend`
+   
+Deployment completed.
+
+Does it really work, though?
+<step7>
+You can visit the application in your browser with the following command: 
+    `minikube service backend`
+ and 
+  `minikube service frontend`
+  
+ If it works, you should try to buy some items!
+
+Is the worker processing transactions?
+
+Yes, given enough time, the worker will process all of the pending messages.
+
+Congratulations!
+
+You just deployed the application to Kubernetes!
+
+
+<h1>Scaling manually to meet increasing demand</h1>
+A single worker may not be able to handle a large number of messages.
+
+In fact, it can only handle one message at the time.
+
+If you decide to buy thousands of items, it will take hours before the queue is cleared.
+
+At this point you have two options:
+
+    you can manually scale up and down
+    you can create autoscaling rules to scale up or down automatically
+
+Let's start with the basics first.
+`kubectl scale --replicas=5 deployment/backend`
+You can verify that Kubernetes created five more instances with:
+`kubectl get pods`
+And the application can process five times more messages.
+
+Once the workers drained the queue, you can scale down with:
+`kubectl scale --replicas=1 deployment/backend`
+Manually scaling up and down is great — if you know when the most traffic hits your service.
