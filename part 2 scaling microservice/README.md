@@ -41,11 +41,14 @@ As frontend, the application renders the web page where people can buy items.
 
 <h2>Step 1</h2>
 start a cluster with 8GB of RAM and some extra configuration:
+
 ```
+
 minikube start \
   --memory 8096 \
   --extra-config=controller-manager.horizontal-pod-autoscaler-upscale-delay=1m \
   --extra-config=controller-manager.horizontal-pod-autoscaler-downscale-delay=2m \
   --extra-config=controller-manager.horizontal-pod-autoscaler-sync-period=10s
+  
 ```
 
