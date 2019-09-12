@@ -145,4 +145,71 @@ spec:
   
 ```
 
+The template is verbose but straightforward to read:
 
+    you asked for an activemq container from the official registry named webcenter/activemq
+    the container exposes the message broker on port 61616
+    there're 512MB of memory allocated for the container
+    you asked for a single replica — a single instance of your application
+    
+        you created a load balancer that exposes port 61616
+    the incoming traffic is distributed to all Pods (see deployment above) that has a label of type app: queue
+    the targetPort is the port exposed by the Pods
+    
+    <h2>step4a</h2>
+    create the resources with:
+    ` kubectl create -f activemq-deployment.yaml`
+   verify that one instance of the database is running with:
+   `kubectl get pods -l=app=queue`
+    <h2>step5</h2>
+  
+    Create a fe-deployment.yaml file with the following content:
+    ```
+    ---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: spring-boot-hpa
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ACTIVEMQ_BROKER_URL
+          value: "tcp://queue:61616"
+        - name: STORE_ENABLED
+          value: "true"
+        - name: WORKER_ENABLED
+          value: "false"
+        ports:
+          - containerPort: 8080
+        readinessProbe:
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          httpGet:
+            path: /health
+            port: 8080
+        resources:
+          limits:
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  ports:
+  - nodePort: 32000
+    port: 80
+    targetPort: 8080
+  selector:
+    app: frontend
+  type: NodePort
+    ```
