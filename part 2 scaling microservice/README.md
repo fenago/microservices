@@ -51,4 +51,62 @@ minikube start \
   --extra-config=controller-manager.horizontal-pod-autoscaler-sync-period=10s
   
 ```
+verify that the installation was successful with: `kubectl get all`
+You should see a few resources listed as a table.
+
+First, connect your Docker client to minikube by following the instruction printed by this command: `minikube docker-env`
+```
+Please note that if you switch terminal, you need to reconnect to the Docker daemon inside minikube. You should follow the same instructions every time you use a different terminal.
+
+```
+<h2>Step 2</h2>
+connect your Docker client to minikube by following the instruction printed by this command:
+` minikube docker-env `
+if you get error something like 
+``` 
+port DOCKER_CERT_PATH="/home/asad/.minikube/certs"
+# Run this command to configure your shell:
+# eval $(minikube docker-env)
+```
+then run eval $(minikube docker-env) too
+```
+lease note that if you switch terminal, you need to reconnect to the Docker daemon inside minikube. You should follow the same instructions every time you use a different terminal.
+```
+<h2>Step 3</h2>
+from the root of the project build the container image with:
+` docker build -t spring-k8s-hpa . `
+
+You can verify that the image was built and is ready to run with:
+`docker images | grep spring`
+
+Great!
+
+The cluster is ready, you packaged your application, perhaps you're ready to deploy now?
+
+Yes, you can finally ask Kubernetes to deploy the applications.
+
+<h1>Deploying your application to Kubernetes<h1>
+   
+ Application has three components:
+
+    the Spring Boot application that renders the frontend
+    ActiveMQ as a message broker
+    the Spring Boot backend that processes transactions
+
+You should deploy the three component separately.
+
+For each of them you should create:
+
+    A Deployment object that describes what container is deployed and its configuration
+    A Service object that acts as a load balancer for all the instances of the application created by the Deployment
+
+Each instance of your application in a deployment is called a Pod.
+
+<h2>step3<h2>
+Deploy ActiveMQ
+
+Let's start with ActiveMQ.
+
+You should create a activemq-deployment.yaml file with the following content:
+
 
