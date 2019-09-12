@@ -102,11 +102,47 @@ For each of them you should create:
 
 Each instance of your application in a deployment is called a Pod.
 
-<h2>step3<h2>
+<h2>step4</h2>
 Deploy ActiveMQ
 
 Let's start with ActiveMQ.
 
 You should create a activemq-deployment.yaml file with the following content:
+
+```
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: queue
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: queue
+    spec:
+      containers:
+      - name: web
+        image: webcenter/activemq:5.14.3
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 61616
+        resources:
+          limits:
+            memory: 512Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: queue
+spec:
+  ports:
+  - port: 61616
+    targetPort: 61616
+  selector:
+    app: queue
+  
+```
 
 
