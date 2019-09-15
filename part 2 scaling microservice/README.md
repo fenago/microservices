@@ -80,6 +80,7 @@ from the root of the project build the container image with:
 You can verify that the image was built and is ready to run with:
 `docker images | grep spring`
 
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/a2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/a2.png "Logo Title Text 1")
 Great!
 
 The cluster is ready, you packaged your application, perhaps you're ready to deploy now?
@@ -94,6 +95,7 @@ Yes, you can finally ask Kubernetes to deploy the applications.
     ActiveMQ as a message broker
     the Spring Boot backend that processes transactions
 
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/a3.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/a3.png "Logo Title Text 1")
 You should deploy the three component separately.
 
 For each of them you should create:
@@ -162,6 +164,8 @@ The template is verbose but straightforward to read:
     ` kubectl create -f activemq-deployment.yaml`
    verify that one instance of the database is running with:
    `kubectl get pods -l=app=queue`
+   
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/a4.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/a4.png "Logo Title Text 1")
     <h2>step5</h2>
 Create a `fe-deployment.yaml` file with the following content:
 ```
