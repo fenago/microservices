@@ -54,7 +54,7 @@ minikube start \
 verify that the installation was successful with: `kubectl get all`
 You should see a few resources listed as a table.
 
-![https://raw.githubusercontent.com/fenago/microservices/master/part%202%20scaling%20microservice/mdimg/1.png](https://raw.githubusercontent.com/fenago/microservices/master/part%202%20scaling%20microservice/mdimg/1.png"Logo Title Text 1")
+![https://github.com/fenago/microservices/blob/master/part%202%20scaling%20microservice/mdimg/1.png](https://github.com/fenago/microservices/blob/master/part%202%20scaling%20microservice/mdimg/1.png"Logo Title Text 1")
 First, connect your Docker client to minikube by following the instruction printed by this command: `minikube docker-env`
 ```
 Please note that if you switch terminal, you need to reconnect to the Docker daemon inside minikube. You should follow the same instructions every time you use a different terminal.
