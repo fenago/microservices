@@ -155,6 +155,12 @@ and remove all the code and paste the following code
 </div>
 
 ```
+<h4>Step 5 </h4>
+!!!Important!!!
+make sure that flask server is up and running we disscussed in part1
+!!!!!!!!!!!!!!!
+Now run the command `ng serve` from terminal inside the angular project folder 
+if everything works as expected then open browser and navigate to `http://localhost:4200/` and you will see the homepage with form to enter the data for prediction and you result will be on bottom coming from REST server
 
 <h2>****  PART3 ****</h2>
 <h3>Dockerize our application for ready to Deploy anywhere</h3>
