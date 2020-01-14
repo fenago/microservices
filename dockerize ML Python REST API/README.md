@@ -45,6 +45,7 @@ def train_model():
 First we need to create a new angular project using following command in terminal to install angular and create new project 
 
 <h4>Step 1</h4>
+
 ```
 npm install -g @angular/cli
 ng new RestClientAngularWeb
@@ -83,7 +84,7 @@ export class AppModule { }
 <h4>Step 3</h4>
 Now Open the file `src/app/app.component.ts`
 
-and remove all the code and paster the folloing code 
+and remove all the code and paste the following code 
 ```
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -120,6 +121,41 @@ export class AppComponent {
 }
 
 ```
+<h4>Step 4 </h4>
+Now Open the file `src/app/app.component.html`
+
+and remove all the code and paste the following code 
+
+```
+<div style="text-align:center">
+  <h1>
+    Welcome to Angular + Python + Flask Demo!
+  </h1>
+</div>
+
+<br>
+
+
+<form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+<br>
+  <div>Sepal Length:<input type="text"     name="sepal_length" ngModel></div>
+<br>
+  <div>Sepal Width:&nbsp;<input type="text"     name="sepal_width"      ngModel></div>
+<br>
+  <div>Petal Length:<input type="text" name="petal_length" ngModel></div>
+<br>
+  <div>Petal Width :&nbsp;<input type="patextssword" name="petal_width"  ngModel></div>
+<br>
+  <button type="submit">Predict</button>
+</form>
+<br>
+<div>
+  
+  <b><span>Prediction: {{result}}</span></b>
+</div>
+
+```
+
 <h2>****  PART3 ****</h2>
 <h3>Dockerize our application for ready to Deploy anywhere</h3>
 
