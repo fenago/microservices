@@ -3,6 +3,9 @@
 <h2>Deploy Your Machine Learning Model as a REST API with Docker using pyhton
 </h2>
 
+![https://github.com/fenago/microservices/blob/master/dockerize%20ML%20Python%20REST%20API/1.png](https://github.com/fenago/microservices/blob/master/dockerize%20ML%20Python%20REST%20API/1.png" Logo Title Text 1")
+
+
 <h2>****  PART1 ****</h2>
 <h3>Machine Learning Model using REST API using FLASK</h3>
 <h4>Step 1</h4>
