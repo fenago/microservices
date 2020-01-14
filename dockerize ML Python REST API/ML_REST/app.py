@@ -1,11 +1,14 @@
-import os
-from flask import Flask, jsonify, request
-from flask_restful import Api, Resource
+from flask import Flask, request,jsonify
+from flask_cors import CORS, cross_origin
+from flask_restful import Resource, Api
+from json import dumps
 from model.Train import train_model
 from sklearn.externals import joblib
-
+import os
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
+
 
 if not os.path.isfile('iris-model.model'):
     train_model()
@@ -30,13 +33,19 @@ class MakePrediction(Resource):
         else:
             predicted_class = 'Iris-virginica'
 
-        return jsonify({
+        response = jsonify({
             'Prediction': predicted_class
         })
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+@app.route("/")    
+def hello():
+    return jsonify({'text':'Hello World!'})
+
 
 
 api.add_resource(MakePrediction, '/predict')
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0', 5000, debug=True)
+    app.run('0.0.0.0', 5002, debug=True)
