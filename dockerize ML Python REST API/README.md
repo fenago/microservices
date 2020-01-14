@@ -82,7 +82,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';   //added line
 export class AppModule { }
 ```
 <h4>Step 3</h4>
-Now Open the file `src/app/app.component.ts`
+Now Open the file  `src/app/app.component.ts`
 
 and remove all the code and paste the following code 
 ```
@@ -122,7 +122,7 @@ export class AppComponent {
 
 ```
 <h4>Step 4 </h4>
-Now Open the file `src/app/app.component.html`
+Now Open the file  `src/app/app.component.html`
 
 and remove all the code and paste the following code 
 
