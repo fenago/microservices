@@ -5,14 +5,74 @@
 
 <h2>****  PART1 ****</h2>
 <h3>Machine Learning Model using REST API using FLASK</h3>
-First we need to install following libraries (Python 3) using pip command
+<h4>Step 1</h4>
+First we need to install following libraries (Python 3) using pip3 command
 
 ```
 pip3 install -U scikit-learn scipy matplotlib
 pip3 install Flask
-pip install Flask-RESTful
+pip3 install Flask-RESTful
+pip3 install -U flask-cors
 ```
-<h3>Predictions Scripts</h3>
+
+<h4>Step 2</h4>
+Create a new Python file `app.py` and insert the below  code in it 
+
+```
+from flask import Flask, request,jsonify
+from flask_cors import CORS, cross_origin
+from flask_restful import Resource, Api
+from json import dumps
+from model.Train import train_model
+from sklearn.externals import joblib
+import os
+app = Flask(__name__)
+api = Api(app)
+CORS(app)
+
+
+if not os.path.isfile('iris-model.model'):
+    train_model()
+
+model = joblib.load('iris-model.model')
+
+
+class MakePrediction(Resource):
+    @staticmethod
+    def post():
+        posted_data = request.get_json()
+        sepal_length = posted_data['sepal_length']
+        sepal_width = posted_data['sepal_width']
+        petal_length = posted_data['petal_length']
+        petal_width = posted_data['petal_width']
+
+        prediction = model.predict([[sepal_length, sepal_width, petal_length, petal_width]])[0]
+        if prediction == 0:
+            predicted_class = 'Iris-setosa'
+        elif prediction == 1:
+            predicted_class = 'Iris-versicolor'
+        else:
+            predicted_class = 'Iris-virginica'
+
+        response = jsonify({
+            'Prediction': predicted_class
+        })
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+@app.route("/")    
+def hello():
+    return jsonify({'text':'Hello World!'})
+
+
+
+api.add_resource(MakePrediction, '/predict')
+
+
+if __name__ == '__main__':
+    app.run('0.0.0.0', 5002, debug=True)
+```
+<h4>Step 3</h4>
+<h5>Predictions Scripts</h5>
 
     The goal is to load in the Iris dataset and use a simple Decision Tree Classifier to train the model. we will use joblib library to save the model once the training is complete, and  we will  also report the accuracy score back to the user
     
@@ -40,6 +100,10 @@ def train_model():
     joblib.dump(dt, 'iris-model.model')
     print('Model Training Finished.\n\tAccuracy obtained: {}'.format(accuracy))
    ```
+   <h4>Step4</h4>
+   now run the file `app.py` if no error occur open browser and navigate to `http://localhost:5002/` and you will see 'Hello World!'.
+   Now our server is online and listening to request  we will disscuss code later on.
+   
   <h2>****  PART2 ****</h2>
 <h3>REST API client GUI using angular</h3>
 First we need to create a new angular project using following command in terminal to install angular and create new project 
