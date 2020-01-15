@@ -168,7 +168,7 @@ node_modules
 
 This will speed up the Docker build process as our local dependencies and git repo will not be sent to the Docker daemon.
 <h4>Step 7 </h4>
-
+<h5>Deploy with docker</h5>
 Run Following command to create image of docker for our app (Run this command in terminal after nvaigating to project directory)
 
 ```
