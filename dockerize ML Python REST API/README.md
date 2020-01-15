@@ -389,7 +389,6 @@ services:
     build: ML_REST
     ports:
     - "5002:5002"
-## mapping interal docker port 8080 to 8001 for external serives (used in worker service in opur case) 
     
 
   angle:
