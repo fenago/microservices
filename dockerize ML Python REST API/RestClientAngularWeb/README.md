@@ -126,6 +126,13 @@ make sure that flask server is up and running we disscussed in part1
 Now run the command `ng serve` from terminal inside the angular project folder 
 if everything works as expected then open browser and navigate to `http://localhost:4200/` and you will see the homepage with form to enter the data for prediction and you result will be on bottom coming from REST server
 
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI1.png "Logo Title Text 1")
+
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png "Logo Title Text 1")
+
+
 <h4>Step 6 </h4>
 Now   create  the `Dockerfile` and add following commands to docker
  
@@ -189,7 +196,10 @@ to check the if your image is running or not  use the following command
 docker ps -a
 ```
 you will see the name of your image in list `angel` (in this case) and status should be up.Now navigate to `http://localhost:4200/` and you will see GUI with form to take parameters from user
+
+
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI1.png "Logo Title Text 1")
+
 
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png "Logo Title Text 1")
 
