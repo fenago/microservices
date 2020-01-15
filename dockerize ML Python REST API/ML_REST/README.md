@@ -11,6 +11,7 @@ That went well? Good. Let’s dive into some good stuff now.
 <h4>Making a Basic Prediction Script</h4>
 If you are following along with the directory structure, you should open up the model/Train.py file now. The goal is to load in the Iris dataset and use a simple Decision Tree Classifier to train the model. I will use joblib library to save the model once the training is complete, and I’ll also report the accuracy score back to the user.
 Nothing complex here, as machine learning isn’t the point of the article, only the model deployment. Here’s the whole script:
+
 ```
 from sklearn import datasets
 from sklearn.tree import DecisionTreeClassifier
@@ -32,6 +33,7 @@ def train_model():
     accuracy = accuracy_score(y_test, preds)
     joblib.dump(dt, 'iris-model.model')
     print('Model Training Finished.\n\tAccuracy obtained: {}'.format(accuracy))
+    
  ```
  
  
