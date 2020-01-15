@@ -1,16 +1,21 @@
-I’ve gone ahead and made the following directory structure:
+<h4>Step 1 </h4>
+create the following directory structure:
 ML-Deploy
 * model / Train.py
 * app.py
-Now if you have your Python installed through Anaconda, then you probably already have all the libraries pre-installed, except for Flask. So fire up the terminal and execute the following:
+<h4>Step 2</h4>
+First we need to install following libraries (Python 3) using pip3 command
 ```
-pip install Flask
-pip install Flask-RESTful
+pip3 install -U scikit-learn scipy matplotlib
+pip3 install Flask
+pip3 install Flask-RESTful
+pip3 install -U flask-cors
 ```
 That went well? Good. Let’s dive into some good stuff now.
-<h4>Making a Basic Prediction Script</h4>
-If you are following along with the directory structure, you should open up the model/Train.py file now. The goal is to load in the Iris dataset and use a simple Decision Tree Classifier to train the model. I will use joblib library to save the model once the training is complete, and I’ll also report the accuracy score back to the user.
-Nothing complex here, as machine learning isn’t the point of the article, only the model deployment. Here’s the whole script:
+<h4>Step 3</h4>
+<h5>Making a Basic Prediction Script</h5>
+If you are following along with the directory structure, you should open up the model/Train.py file now. The goal is to load in the Iris dataset and use a simple Decision Tree Classifier to train the model. we will use joblib library to save the model once the training is complete, and we will also report the accuracy score back to the user.
+ Here’s the whole script:
 
 ```
 from sklearn import datasets
@@ -35,9 +40,10 @@ def train_model():
     print('Model Training Finished.\n\tAccuracy obtained: {}'.format(accuracy))
     
  ```
+ So this it all for our Train model. You can add more model or create any model here and add to flask server (you will see in next step) and call it from frontend GUI
  
- 
-<h4>Deploying</h4>
+<h4>Step 4</h4>
+<h5>Creating Flask app to deploy our train model</h5>
 Now you’re ready to open the app.py file and do some imports. You’ll need the os module, a couple of things from Flask and Flask-RESTful, the model training script created 10 seconds ago, and the joblib to load in the trained model:
 ```
 import os
