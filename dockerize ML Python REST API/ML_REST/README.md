@@ -1,14 +1,17 @@
 I’ve gone ahead and made the following directory structure:
 ML-Deploy
-model / Train.py
-app.py
+* model / Train.py
+* app.py
 Now if you have your Python installed through Anaconda, then you probably already have all the libraries pre-installed, except for Flask. So fire up the terminal and execute the following:
+```
 pip install Flask
 pip install Flask-RESTful
+```
 That went well? Good. Let’s dive into some good stuff now.
-Making a Basic Prediction Script
+<h4>Making a Basic Prediction Script</h4>
 If you are following along with the directory structure, you should open up the model/Train.py file now. The goal is to load in the Iris dataset and use a simple Decision Tree Classifier to train the model. I will use joblib library to save the model once the training is complete, and I’ll also report the accuracy score back to the user.
 Nothing complex here, as machine learning isn’t the point of the article, only the model deployment. Here’s the whole script:
+```
 from sklearn import datasets
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
@@ -29,23 +32,31 @@ def train_model():
     accuracy = accuracy_score(y_test, preds)
     joblib.dump(dt, 'iris-model.model')
     print('Model Training Finished.\n\tAccuracy obtained: {}'.format(accuracy))
-Deploying
+ ```
+<h4>Deploying</h4>
 Now you’re ready to open the app.py file and do some imports. You’ll need the os module, a couple of things from Flask and Flask-RESTful, the model training script created 10 seconds ago, and the joblib to load in the trained model:
+```
 import os
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
 from model.Train import train_model
 from sklearn.externals import joblib
+```
 Now you should make an instance of Flask and Api from Flask-RESTful. Nothing complex:
+```
 app = Flask(__name__)
 api = Api(app)
+```
 The next thing to do is to check whether the model is already trained or not. In the Train.py you’ve declared that the model will be saved in the file iris-model.model, and if that file doesn’t exist, the model should be trained first. Once trained, you can load it in via joblib:
+```
 if not os.path.isfile('iris-model.model'):
     train_model()
 
 model = joblib.load('iris-model.model')
+```
 Now you’ll need to declare a class for making predictions. Flask-RESTful uses this coding convention, so your class will need to inherit from the Flask-RESTful Resource module. Inside the class, you can declare get(), post(), or any other method for handling data.
 We’ll use post(), so the data isn’t passed directly through the URL. You’ll need to fetch attributes from the user input (prediction is made based on attribute value the user has entered). Then, you can call .predict() function of the loaded model. Just because the target variable of this dataset is in the form (0, 1, 2) instead of (‘Iris-setosa’, ‘Iris-versicolor’, ‘Iris-virginica’), you’ll also want to address that. Finally, you can return JSON representation of the prediction:
+```
 class MakePrediction(Resource):
     @staticmethod
     def post():
@@ -66,13 +77,19 @@ class MakePrediction(Resource):
         return jsonify({
             'Prediction': predicted_class
         })
+```        
 We’re almost there, so hang in tight! You’ll also need to declare a route, the part of URL which will be used to handle requests:
+```
 api.add_resource(MakePrediction, '/predict')
+```
 And the final thing is to tell Python to run the app in debug mode:
+```
 if __name__ == '__main__':
     app.run(debug=True)
+```    
 And that’s it. You’re ready to launch the model and make predictions, either through Postman or some other tool.
 Just in case you missed something, here’s the entire app.py file:
+```
 import os
 from flask import Flask, jsonify, request
 from flask_restful import Api, Resource
@@ -115,6 +132,7 @@ api.add_resource(MakePrediction, '/predict')
 
 if __name__ == '__main__':
     app.run(debug=True)
+```    
 Okay, are you ready?
 
 
