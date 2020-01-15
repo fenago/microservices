@@ -1,0 +1,15 @@
+version: "2"
+
+services:
+  ml_rest:
+    build: ML_REST
+    ports:
+    - "5002:5002"
+## mapping interal docker port 8080 to 8001 for external serives (used in worker service in opur case) 
+    
+
+  angle:
+    build: RestClientAngularWeb
+    ports:
+    - "4200:4200"
+

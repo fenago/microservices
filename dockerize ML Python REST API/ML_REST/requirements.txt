@@ -1,0 +1,6 @@
+flask
+flask-restful
+scikit-learn
+scipy 
+matplotlib
+flask-cors
