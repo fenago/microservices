@@ -196,8 +196,8 @@ Okay, are you ready?
   
 <h4>Step 6</h4>
 <h5>Deploy the code as a microservice using docker</h5>
-First create a file `requirements.txt` to add all the librairies required  run this python project
-Add the following text to newly created `requirements.txt`
+First create a file  `requirements.txt` to add all the librairies required  run this python project
+Add the following text to newly created  `requirements.txt`
 
 ```
 flask
@@ -242,7 +242,7 @@ to check the if your image is running or not  use the following command
 ```
 docker ps -a
 ```
-you will see the name of your image in list `abcdef int this case`and status should be up.Now navigate to `http://localhost:5002/` and you will see 'Hello World!'.
+you will see the name of your image in list `abcdef` (in this case) and status should be up.Now navigate to `http://localhost:5002/` and you will see 'Hello World!'.
 
 
    
