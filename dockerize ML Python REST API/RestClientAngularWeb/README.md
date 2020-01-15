@@ -117,16 +117,18 @@ and remove all the code and paste the following code
 In this step we create a form to take input from user and submit to call FLASK REST API .we can modify the form to take more input if our model required 
  
 <h4>Step 5 </h4>
+
 !!!Important!!!
 make sure that flask server is up and running we disscussed in part1
-
-
 !!!!!!!!!!!!!!!
+
+
 Now run the command `ng serve` from terminal inside the angular project folder 
 if everything works as expected then open browser and navigate to `http://localhost:4200/` and you will see the homepage with form to enter the data for prediction and you result will be on bottom coming from REST server
 
 <h4>Step 6 </h4>
 Now   create  the `Dockerfile` and add following commands to docker
+ 
 ```
 # base image
 FROM node:12.2.0
@@ -153,6 +155,7 @@ COPY . /app
 # start app
 CMD ng serve --host 0.0.0.0
 ```
+ 
 Now we are done for this step.its time to create and deploy our docker image
 <h4>Step 7</h4>
 Create a .dockerignore as well and add following lines:
@@ -170,15 +173,15 @@ Run Following command to create image of docker for our app (Run this command in
 
 ```
 docker build -t angel:latest .
-
 ```
-here `abcdef` is the name of image you change it too
 
+here `abcdef` is the name of image you change it too
 now run the following command in terminal to up the app
 
 ```
 docker run -v ${PWD}:/app -v /app/node_modules -p 4200:4200 --rm angel:latest
 ```
+
 now our app is listening on port 4200
 to check the if your image is running or not  use the following command
 
