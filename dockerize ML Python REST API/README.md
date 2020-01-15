@@ -509,10 +509,10 @@ services:
  
  ```
  
- ![https://github.com/fenago/microservices/blob/master/coin/mdimg/composeRest1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/composeRest1.png "Logo Title Text 1")
+ ![https://github.com/fenago/microservices/blob/master/coin/mdimg/dockerRest1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/dockerRest1.png "Logo Title Text 1")
  
  
-  ![https://github.com/fenago/microservices/blob/master/coin/mdimg/composeRest2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/composeRest2.png "Logo Title Text 1")
+  ![https://github.com/fenago/microservices/blob/master/coin/mdimg/dockerRest2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/dockerRest2.png "Logo Title Text 1")
   
   
 Now wait to finish it.Once finished open the browser and navigate to localhost:5002 for FLASK app trsting and localhost:4200 angular app and you will see the GUI to enter the parameter to get prediction 
