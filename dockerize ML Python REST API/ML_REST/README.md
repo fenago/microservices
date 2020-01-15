@@ -33,6 +33,8 @@ def train_model():
     joblib.dump(dt, 'iris-model.model')
     print('Model Training Finished.\n\tAccuracy obtained: {}'.format(accuracy))
  ```
+ 
+ 
 <h4>Deploying</h4>
 Now you’re ready to open the app.py file and do some imports. You’ll need the os module, a couple of things from Flask and Flask-RESTful, the model training script created 10 seconds ago, and the joblib to load in the trained model:
 ```
