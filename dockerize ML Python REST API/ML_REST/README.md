@@ -1,19 +1,29 @@
 <h4>Step 1 </h4>
 create the following directory structure:
+
 ML-Deploy
+
 * model / Train.py
 * app.py
+
 <h4>Step 2</h4>
-First we need to install following libraries (Python 3) using pip3 command
+
+First we need to install following libraries (Python 3) using pip3(or pip in some cases) command
+
 ```
 pip3 install -U scikit-learn scipy matplotlib
 pip3 install Flask
 pip3 install Flask-RESTful
 pip3 install -U flask-cors
+
 ```
+
 That went well? Good. Let’s dive into some good stuff now.
+
 <h4>Step 3</h4>
+
 <h5>Making a Basic Prediction Script</h5>
+
 If you are following along with the directory structure, you should open up the model/Train.py file now. The goal is to load in the Iris dataset and use a simple Decision Tree Classifier to train the model. we will use joblib library to save the model once the training is complete, and we will also report the accuracy score back to the user.
  Here’s the whole script:
 
@@ -43,7 +53,9 @@ def train_model():
  So this it all for our Train model. You can add more model or create any model here and add to flask server (you will see in next step) and call it from frontend GUI
  
 <h4>Step 4</h4>
+
 <h5>Creating Flask app to deploy our train model</h5>
+
 Now you’re ready to open the app.py file and do some imports. You’ll need the os module, a couple of things from Flask and Flask-RESTful, the model training script created 10 seconds ago, and the joblib to load in the trained model:
 ```
 import os
