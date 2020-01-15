@@ -174,14 +174,14 @@ Run Following command to create image of docker for our app (Run this command in
 ```
 docker build -t angel:latest .
 ```
-
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularB1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularB1.png "Logo Title Text 1")
 here `abcdef` is the name of image you change it too
 now run the following command in terminal to up the app
 
 ```
 docker run -v "${PWD}:/app" -v /app/node_modules -p 4200:4200 --rm angel:latest
 ```
-
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularB2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularB2.png "Logo Title Text 1")
 now our app is listening on port 4200
 to check the if your image is running or not  use the following command
 
@@ -189,3 +189,7 @@ to check the if your image is running or not  use the following command
 docker ps -a
 ```
 you will see the name of your image in list `angel` (in this case) and status should be up.Now navigate to `http://localhost:4200/` and you will see GUI with form to take parameters from user
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI1.png "Logo Title Text 1")
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png "Logo Title Text 1")
+
