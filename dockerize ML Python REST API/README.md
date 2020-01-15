@@ -379,4 +379,28 @@ if everything works as expected then open browser and navigate to `http://localh
 <h2>****  PART3 ****</h2>
 <h3>Dockerize our application for ready to Deploy anywhere</h3>
 
-   
+  Now Create the file `docker-compose.yml` and add the following lines
+  
+  ```
+  version: "2"
+
+services:
+  ml_rest:
+    build: ML_REST
+    ports:
+    - "5002:5002"
+## mapping interal docker port 8080 to 8001 for external serives (used in worker service in opur case) 
+    
+
+  angle:
+    build: RestClientAngularWeb
+    ports:
+    - "4200:4200"
+```
+ Now open the terminal navigate to our project directory and run the following command 
+ 
+ ```
+ docker-compose up
+ 
+ ```
+Now wait to finish it.Once finished open the browser and navigate to localhost:4200 and you will see the GUI to enter the parameter to get prediction 
