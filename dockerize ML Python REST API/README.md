@@ -243,7 +243,7 @@ here `abcdef` is the name of image you change it too
 now run the following command in terminal to up the app
 
 ```
-docker run -d -p 5002:5002 abcdef`
+docker run -d -p 5002:5002 abcdef
 ```
 now our app is listening on port 5002
 to check the if your image is running or not  use the following command
