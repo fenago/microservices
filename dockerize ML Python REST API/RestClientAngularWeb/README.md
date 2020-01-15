@@ -1,6 +1,5 @@
-  
-  <h2>****  PART2 ****</h2>
-<h3>REST API client GUI using angular</h3>
+
+<h2>REST API client GUI using angular</h2>
 First we need to create a new angular project using following command in terminal to install angular and create new project 
 
 <h4>Step 1</h4>
