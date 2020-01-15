@@ -58,17 +58,22 @@ def train_model():
 
 Now you’re ready to open the app.py file and do some imports. You’ll need the os module, a couple of things from Flask and Flask-RESTful, the model training script created 10 seconds ago, and the joblib to load in the trained model:
 ```
-import os
-from flask import Flask, jsonify, request
-from flask_restful import Api, Resource
+from flask import Flask, request,jsonify
+from flask_cors import CORS, cross_origin
+from flask_restful import Resource, Api
+from json import dumps
 from model.Train import train_model
 from sklearn.externals import joblib
+import os
 ```
 Now you should make an instance of Flask and Api from Flask-RESTful. Nothing complex:
 ```
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 ```
+here `CORS(app)` will allow flask server to get porst request from anguler GUI or other client
+
 The next thing to do is to check whether the model is already trained or not. In the Train.py you’ve declared that the model will be saved in the file iris-model.model, and if that file doesn’t exist, the model should be trained first. Once trained, you can load it in via joblib:
 ```
 if not os.path.isfile('iris-model.model'):
@@ -96,30 +101,49 @@ class MakePrediction(Resource):
         else:
             predicted_class = 'Iris-virginica'
 
-        return jsonify({
+        response = jsonify({
             'Prediction': predicted_class
         })
-```        
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+```   
+Now let create simple method for root address . This will help us fors testing our server if alive or not 
+
+```
+@app.route("/")    
+def hello():
+    return jsonify({'text':'Hello World!'})
+```
+
 We’re almost there, so hang in tight! You’ll also need to declare a route, the part of URL which will be used to handle requests:
 ```
 api.add_resource(MakePrediction, '/predict')
 ```
+<h6>
+ In this line we bind our endpoint `/predict` to our class `MakePrediction` (and in this class we define to tak post request)
+So if you want to add new model then you have create new  EndPoint for new Model and add bind new class wih it like we id here 
+ </h6>
+ 
 And the final thing is to tell Python to run the app in debug mode:
+ 
 ```
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run('0.0.0.0', 5002, debug=True)
 ```    
 And that’s it. You’re ready to launch the model and make predictions, either through Postman or some other tool.
 Just in case you missed something, here’s the entire app.py file:
 ```
-import os
-from flask import Flask, jsonify, request
-from flask_restful import Api, Resource
+from flask import Flask, request,jsonify
+from flask_cors import CORS, cross_origin
+from flask_restful import Resource, Api
+from json import dumps
 from model.Train import train_model
 from sklearn.externals import joblib
-
+import os
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
+
 
 if not os.path.isfile('iris-model.model'):
     train_model()
@@ -144,16 +168,22 @@ class MakePrediction(Resource):
         else:
             predicted_class = 'Iris-virginica'
 
-        return jsonify({
+        response = jsonify({
             'Prediction': predicted_class
         })
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+@app.route("/")    
+def hello():
+    return jsonify({'text':'Hello World!'})
+
 
 
 api.add_resource(MakePrediction, '/predict')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run('0.0.0.0', 5002, debug=True)
 ```    
 Okay, are you ready?
 
