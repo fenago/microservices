@@ -179,7 +179,7 @@ here `abcdef` is the name of image you change it too
 now run the following command in terminal to up the app
 
 ```
-docker run -v ${PWD}:/app -v /app/node_modules -p 4200:4200 --rm angel:latest
+docker run -v "${PWD}:/app" -v /app/node_modules -p 4200:4200 --rm angel:latest
 ```
 
 now our app is listening on port 4200
