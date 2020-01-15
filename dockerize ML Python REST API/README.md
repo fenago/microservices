@@ -7,7 +7,9 @@
 
 
 <h2>****  PART1 ****</h2>
- <h4>Step 1 </h4>
+ <h3>Machine Learning Model using REST API using FLASK</h3>
+
+<h4>Step 1 </h4>
 create the following directory structure:
 
 ML-Deploy
@@ -202,7 +204,10 @@ Okay, are you ready?
 <h4>Step 5</h4>
  run the file `app.py` if no error occur open browser and navigate to `http://localhost:5002/` and you will see 'Hello World!'.
    Now our server is online and listening to request.
-  
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png "Logo Title Text 1")
+
+
 <h4>Step 6</h4>
 <h5>Deploy the code as a microservice using docker</h5>
 First create a file  `requirements.txt` to add all the librairies required  run this python project
@@ -238,12 +243,17 @@ Run Following command to create image of docker for our app (Run this command in
 docker build -t abcdef:latest .
 
 ```
+
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker00.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker00.png "Logo Title Text 1")
+
+
 here `abcdef` is the name of image you change it too
 
 now run the following command in terminal to up the app
 
 ```
-docker run -d -p 5002:5002 abcdef
+docker run -d -p 5002:5002 abcdef`
 ```
 now our app is listening on port 5002
 to check the if your image is running or not  use the following command
@@ -251,7 +261,16 @@ to check the if your image is running or not  use the following command
 ```
 docker ps -a
 ```
+
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker.png "Logo Title Text 1")
+
+
 you will see the name of your image in list `abcdef` (in this case) and status should be up.Now navigate to `http://localhost:5002/` and you will see 'Hello World!'.
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png "Logo Title Text 1")
+   
+
 
    
   <h2>****  PART2 ****</h2>
@@ -489,4 +508,9 @@ services:
  docker-compose up
  
  ```
+ 
+ ![https://github.com/fenago/microservices/blob/master/coin/mdimg/composeRest.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/composeRest.png "Logo Title Text 1")
+ 
 Now wait to finish it.Once finished open the browser and navigate to localhost:4200 and you will see the GUI to enter the parameter to get prediction 
+
+![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png "Logo Title Text 1")
