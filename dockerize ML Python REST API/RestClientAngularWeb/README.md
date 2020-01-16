@@ -40,9 +40,9 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';   //added line
 export class AppModule { }
 ```
 <h4>Step 3</h4>
-Now Open the file  `src/app/app.component.ts`
+Now open the file  `src/app/app.component.ts`
 
-and remove all the code and paste the following code 
+and remove all the existing code and replace it with the following code 
 ```
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -79,11 +79,11 @@ export class AppComponent {
 }
 
 ```
-here we created a method `onSubmit(formData)` which will take the JSON data from the form and post it to our flask server `(ENDPOINT predict)` and then get the the result and display on GUI.Basically in this step we are calling RESTFUL api.If we have any new Model then we just need to call it api in this step
+here we created a method `onSubmit(formData)` which will take the JSON data from the form and post it to our flask server `(ENDPOINT predict)` and then get the the result and display on GUI. Basically in this step we are calling RESTFUL api.If we have any new Model then we just need to call its API in the similar way.
 <h4>Step 4 </h4>
-Now Open the file  `src/app/app.component.html`
+Now open the file  `src/app/app.component.html`
 
-and remove all the code and paste the following code 
+and remove all the code and replace with the following code 
 
 ```
 <div style="text-align:center">
@@ -114,7 +114,7 @@ and remove all the code and paste the following code
 </div>
 
 ```
-In this step we create a form to take input from user and submit to call FLASK REST API .we can modify the form to take more input if our model required 
+In this step we had created a form to take input from user and submit to call FLASK REST API .we can modify the form to take more input if  required by REST API
  
 <h4>Step 5 </h4>
 
@@ -182,7 +182,8 @@ Run Following command to create image of docker for our app (Run this command in
 docker build -t angel:latest .
 ```
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularB1.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularB1.png "Logo Title Text 1")
-here `abcdef` is the name of image you change it too
+
+here `angel` is the name of image you change it too
 now run the following command in terminal to up the app
 
 ```
@@ -202,4 +203,3 @@ you will see the name of your image in list `angel` (in this case) and status sh
 
 
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/angularGUI2.png "Logo Title Text 1")
-
