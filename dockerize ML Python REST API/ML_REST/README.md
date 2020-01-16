@@ -1,4 +1,4 @@
-<h3>Machine Learning Model using REST API using FLASK</h3>
+ <h3>Machine Learning Model using REST API using FLASK</h3>
 
 <h4>Step 1 </h4>
 create the following directory structure:
@@ -76,7 +76,7 @@ api = Api(app)
 CORS(app)
 ```
 
-here `CORS(app)` will allow flask server to get  request  GUI withput browser restrictions
+`CORS(app)` is a Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible. This package has a simple philosophy, when you want to enable CORS, you wish to enable it for all use cases on a domain. This means no mucking around with different allowed headers, methods, etc.
 
 The next thing to do is to check whether the model is already trained or not. In the Train.py you’ve declared that the model will be saved in the file iris-model.model, and if that file doesn’t exist, the model should be trained first. Once trained, you can load it in via joblib:
 ```
@@ -86,7 +86,7 @@ if not os.path.isfile('iris-model.model'):
 model = joblib.load('iris-model.model')
 ```
 Now you’ll need to declare a class for making predictions. Flask-RESTful uses this coding convention, so your class will need to inherit from the Flask-RESTful Resource module. Inside the class, you can declare get(), post(), or any other method for handling data.
-We’ll use post(), so the data isn’t passed directly through the URL. You’ll need to fetch attributes from the user input (prediction is made based on attribute value the user has entered). Then, you can call .predict() function of the loaded model. Just because the target variable of this dataset is in the form (0, 1, 2) instead of (‘Iris-setosa’, ‘Iris-versicolor’, ‘Iris-virginica’), you’ll also want to address that. Finally, you can return JSON representation of the prediction:
+We’ll use post(), so the data isn’t passed directly through the URL. You’ll need to fetch attributes from the user input (prediction is made based on attribute value the user has entered). Then, you can call .predict() function of the loaded model. Just because the target variable of this dataset is in the form `(0, 1, 2)` instead of `(‘Iris-setosa’, ‘Iris-versicolor’, ‘Iris-virginica’)`, you’ll also want to address that. Finally, you can return JSON representation of the prediction:
 ```
 class MakePrediction(Resource):
     @staticmethod
@@ -111,7 +111,7 @@ class MakePrediction(Resource):
         response.headers.add('Access-Control-Allow-Origin', '*')
         return response
 ```   
-Now let create simple method for root address . This will help us fors testing our server if alive or not 
+Now let create simple method for root address . This will help us to check our flask  server if online or not 
 
 ```
 @app.route("/")    
@@ -193,7 +193,7 @@ if __name__ == '__main__':
 Okay, are you ready?
 
 <h4>Step 5</h4>
- run the file `app.py` if no error occur open browser and navigate to `http://localhost:5002/` and you will see 'Hello World!'.
+ Run the file `app.py` if no error occur open browser and navigate to `http://localhost:5002/` and you will see 'Hello World!'.
    Now our server is online and listening to request.
 
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png "Logo Title Text 1")
@@ -201,7 +201,7 @@ Okay, are you ready?
 
 <h4>Step 6</h4>
 <h5>Deploy the code as a microservice using docker</h5>
-First create a file  `requirements.txt` to add all the librairies required  run this python project
+First, create a file  `requirements.txt` to add all the librairies require for our app
 Add the following text to newly created  `requirements.txt`
 
 ```
@@ -224,7 +224,7 @@ ENTRYPOINT ["python"]
 CMD ["app.py"]
 EXPOSE 5002
 ```
-Now we are done for this step.its time to create and deploy our docker image
+Now we are done for this step.Now we will create and deploy our docker image
 
 <h4>Step 7 </h4>
 
@@ -239,9 +239,9 @@ docker build -t abcdef:latest .
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker00.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker00.png "Logo Title Text 1")
 
 
-here `abcdef` is the name of image you change it too
+here `abcdef` is the name of image you change it to your choice
 
-now run the following command in terminal to up the app
+now run the following command in terminal to deploy and making it online.
 
 ```
 docker run -d -p 5002:5002 abcdef`
@@ -257,7 +257,6 @@ docker ps -a
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlDocker.png "Logo Title Text 1")
 
 
-you will see the name of your image in list `abcdef` (in this case) and status should be up.Now navigate to `http://localhost:5002/` and you will see 'Hello World!'.
+you will see the name of your image in list `abcdef` (in this case) and status should be `up` .Now navigate to `http://localhost:5002/` and you will see 'Hello World!'.
 
 ![https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png](https://github.com/fenago/microservices/blob/master/coin/mdimg/mlGUI.png "Logo Title Text 1")
-   
