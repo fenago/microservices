@@ -85,7 +85,7 @@ api = Api(app)
 CORS(app)
 ```
 
-here `CORS(app)` will allow flask server to get  request  GUI withput browser restrictions
+`CORS(app)` is a Flask extension for handling Cross Origin Resource Sharing (CORS), making cross-origin AJAX possible. This package has a simple philosophy, when you want to enable CORS, you wish to enable it for all use cases on a domain. This means no mucking around with different allowed headers, methods, etc.
 
 The next thing to do is to check whether the model is already trained or not. In the Train.py you’ve declared that the model will be saved in the file iris-model.model, and if that file doesn’t exist, the model should be trained first. Once trained, you can load it in via joblib:
 ```
