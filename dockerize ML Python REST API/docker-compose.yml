@@ -11,4 +11,3 @@ services:
     build: RestClientAngularWeb
     ports:
     - "4200:4200"
-
